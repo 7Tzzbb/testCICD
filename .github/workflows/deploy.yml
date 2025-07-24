@@ -29,8 +29,7 @@ jobs:
         # 第四步：使用 pnpm 安装项目依赖（会根据 pnpm-lock.yaml 安装精准依赖）
 
       - name: Build & Export Next.js static site
-        run: |
-          pnpm run build        # 构建 Next.js 项目，生成 .next 目录
+        run: pnpm run build
         # 第五步：执行构建命令，生成静态文件并输出到 out 目录
 
       - name: List files in out directory for debugging
@@ -39,18 +38,18 @@ jobs:
 
       - name: Move out contents to root
         run: |
-          mv ./out/* ./out/.* ./  # 将 out 目录下的所有文件（包括隐藏文件）移动到根目录
-          rmdir ./out             # 删除空 out 目录
-        # 第七步：移动 out 内的内容到根目录，并删除空 out 目录
-        # 解释：删除空 out 是因为在移动文件后，out 目录可能变成空文件夹，rmdir 命令用于移除空目录，以避免不必要的目录结构上传到服务器
+          shopt -s dotglob            # 开启 dotglob，使 * 匹配隐藏文件（如 .nojekyll）
+          mv ./out/* ./               # 移动 out 目录下的所有内容（包括隐藏文件）到当前目录
+          rmdir ./out                 # 删除空的 out 目录
+        # 第七步：将 out 目录中的内容移至项目根目录，以便上传时不包含 out 本身
 
       - name: Deploy to server with SSH key
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.DEPLOY_HOST }}         # 目标服务器 IP 或域名（保存在 GitHub Secrets 中）
-          username: ${{ secrets.DEPLOY_USER }}     # SSH 用户名
-          key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥（用于免密登录）
-          port: 22                                 # SSH 端口（默认 22）
-          source: "./*"                             # 上传根目录下的所有内容
-          target: "/home/wwwroot/www.next.com/"     # 目标路径，直接放入指定目录
-        # 第八步：使用 scp 将根目录内容上传至服务器指定路径，完成部署
+          host: ${{ secrets.DEPLOY_HOST }}         # 目标服务器 IP 或域名（配置在 Secrets 中）
+          username: ${{ secrets.DEPLOY_USER }}     # SSH 登录用户名
+          key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥（配置在 Secrets 中）
+          port: 22                                 # SSH 端口，默认 22
+          source: "./*"                            # 上传当前目录下的所有内容（不包含 out 目录）
+          target: "/home/wwwroot/www.next.com/"    # 服务器部署目录路径
+        # 第八步：通过 SSH 上传构建后的静态文件到远程服务器，完成部署
