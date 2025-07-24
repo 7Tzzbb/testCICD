@@ -27,7 +27,6 @@ jobs:
       - name: Build & Export Next.js static site
         run: |
           pnpm run build
-          pnpm run export
 
       - name: List files in out directory for debugging
         run: ls -la ./out
