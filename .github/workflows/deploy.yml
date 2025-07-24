@@ -31,7 +31,6 @@ jobs:
       - name: Build & Export Next.js static site
         run: |
           pnpm run build    # 执行 Next.js 构建命令，生成 .next 目录
-          pnpm run export   # 导出为静态站点，输出到 out 文件夹
 
       - name: List files in out directory for debugging
         run: ls -la ./out
