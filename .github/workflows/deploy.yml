@@ -43,6 +43,6 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}     # SSH 用户名
           key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥（用于免密登录）
           port: 22                                 # SSH 端口（默认 22）
-          source: "./out/"                         # 本地要上传的目录
+          source: "./out/*"                         # 本地要上传的目录
           target: "/home/wwwroot/www.next.com/"   # 远程服务器上的目标路径
         # 第七步：使用 scp 将 out 目录上传到服务器，完成部署
