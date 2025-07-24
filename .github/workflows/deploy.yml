@@ -33,8 +33,7 @@ jobs:
         # 打印 out 文件夹内容，确认文件生成
 
       - name: Deploy `out` folder to server with SSH key
-        uses: appleboy/scp-action@v0.1.11
-
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DEPLOY_HOST }}         # 服务器 IP 或域名
           username: ${{ secrets.DEPLOY_USER }}     # SSH 用户名
@@ -42,14 +41,3 @@ jobs:
           port: 22                                 # SSH 端口
           source: "./out/"                         # 上传整个 out 文件夹内容
           target: "/home/wwwroot/www.next.com/"   # 服务器目标路径
-
-      # 如果你需要用 DEPLOY_TOKEN 做密码认证（替代私钥），可以用如下步骤代替上面 scp 部分
-      # - name: Deploy `out` folder to server with password (using DEPLOY_TOKEN)
-      #   uses: appleboy/scp-action@v0.1.11
-      #   with:
-      #     host: ${{ secrets.DEPLOY_HOST }}
-      #     username: ${{ secrets.DEPLOY_USER }}
-      #     password: ${{ secrets.DEPLOY_TOKEN }}
-      #     port: 22
-      #     source: "./out/"
-      #     target: "/home/wwwroot/www.next.com/"
