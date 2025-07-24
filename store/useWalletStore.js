@@ -19,5 +19,4 @@ const useWalletStore = create((set) => ({
   }),
 }));
 
-
 export default useWalletStore;
