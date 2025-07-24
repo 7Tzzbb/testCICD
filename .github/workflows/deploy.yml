@@ -43,6 +43,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}     # SSH 登录用户名
           key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥（配置在 Secrets 中）
           port: 22                                 # SSH 端口，默认 22
-          source: "out/***"                        # 上传当前目录下的所有内容（不包含 out 目录）
-          target: "/home/wwwroot/www.next.com/"    # 服务器部署目录路径
+          source: "out/**"                         # 上传当前目录下的所有内容（不包含 out 目录）
+          target: "/home/wwwroot/www.next.com"     # 服务器部署目录路径
+          strip_components: 1
         # 第七步：通过 SSH 上传构建后的静态文件到远程服务器，完成部署
