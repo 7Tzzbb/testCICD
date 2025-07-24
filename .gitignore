@@ -3,6 +3,7 @@ node_modules
 /dist
 dist.zip
 .next
+.github
 out
 # local env files
 .env.local
