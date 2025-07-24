@@ -30,19 +30,19 @@ jobs:
 
       - name: Build & Export Next.js static site
         run: |
-          pnpm run build    # 执行 Next.js 构建命令，生成 .next 目录
+          pnpm run build        # 构建 Next.js 项目，生成 .next 目录
 
       - name: List files in out directory for debugging
         run: ls -la ./out
         # 第六步：列出 out 目录内容，用于调试确认静态文件是否正确生成
 
-      - name: Deploy `out` folder to server with SSH key
+      - name: Deploy `out` folder content to server with SSH key
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DEPLOY_HOST }}         # 目标服务器 IP 或域名（保存在 GitHub Secrets 中）
           username: ${{ secrets.DEPLOY_USER }}     # SSH 用户名
           key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥（用于免密登录）
           port: 22                                 # SSH 端口（默认 22）
-          source: "./out/*"                         # 本地要上传的目录
-          target: "/home/wwwroot/www.next.com/"   # 远程服务器上的目标路径
-        # 第七步：使用 scp 将 out 目录上传到服务器，完成部署
+          source: "./out/*"                        # 👈 只上传 out 文件夹下的所有内容
+          target: "/home/wwwroot/www.next.com/"    # 👈 直接放进指定目标路径（不会多一层 out）
+        # 第七步：使用 scp 将 out 目录下的内容上传至服务器指定路径，完成部署
