@@ -12,32 +12,32 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        # 拉取代码到 runner
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # 安装 Node.js 18
+          node-version: '18'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: npm ci
-        # 安装依赖，使用 npm ci 保证一致性
+        run: pnpm install
 
       - name: Build & Export Next.js static site
         run: |
-          npm run build
-          npm run export  # 构建并导出静态文件夹 out
+          pnpm run build
+          pnpm run export
 
       - name: List files in out directory for debugging
         run: ls -la ./out
-        # 打印 out 文件夹内容，确认文件生成
 
       - name: Deploy `out` folder to server with SSH key
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.DEPLOY_HOST }}         # 服务器 IP 或域名
-          username: ${{ secrets.DEPLOY_USER }}     # SSH 用户名
-          key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥
-          port: 22                                 # SSH 端口
-          source: "./out/"                         # 上传整个 out 文件夹内容
-          target: "/home/wwwroot/www.next.com/"   # 服务器目标路径
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          source: "./out/"
+          target: "/home/wwwroot/www.next.com/"
