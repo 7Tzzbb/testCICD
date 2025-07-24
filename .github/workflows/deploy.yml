@@ -36,13 +36,6 @@ jobs:
         run: ls -la ./out
         # 第六步：列出 out 目录内容，用于调试确认静态文件是否正确生成
 
-      - name: Move out contents to root
-        run: |
-          shopt -s dotglob            # 开启 dotglob，使 * 匹配隐藏文件（如 .nojekyll）
-          mv ./out/* ./               # 移动 out 目录下的所有内容（包括隐藏文件）到当前目录
-          rmdir ./out                 # 删除空的 out 目录
-        # 第七步：将 out 目录中的内容移至项目根目录，以便上传时不包含 out 本身
-
       - name: Deploy to server with SSH key
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -50,6 +43,6 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}     # SSH 登录用户名
           key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥（配置在 Secrets 中）
           port: 22                                 # SSH 端口，默认 22
-          source: "out/**"                        # 上传当前目录下的所有内容（不包含 out 目录）
+          source: "out/***"                        # 上传当前目录下的所有内容（不包含 out 目录）
           target: "/home/wwwroot/www.next.com/"    # 服务器部署目录路径
-        # 第八步：通过 SSH 上传构建后的静态文件到远程服务器，完成部署
+        # 第七步：通过 SSH 上传构建后的静态文件到远程服务器，完成部署
