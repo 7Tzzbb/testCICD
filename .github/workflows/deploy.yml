@@ -31,18 +31,26 @@ jobs:
       - name: Build & Export Next.js static site
         run: |
           pnpm run build        # 构建 Next.js 项目，生成 .next 目录
+        # 第五步：执行构建命令，生成静态文件并输出到 out 目录
 
       - name: List files in out directory for debugging
         run: ls -la ./out
         # 第六步：列出 out 目录内容，用于调试确认静态文件是否正确生成
 
-      - name: Deploy `out` folder content to server with SSH key
+      - name: Move out contents to root
+        run: |
+          mv ./out/* ./out/.* ./  # 将 out 目录下的所有文件（包括隐藏文件）移动到根目录
+          rmdir ./out             # 删除空 out 目录
+        # 第七步：移动 out 内的内容到根目录，并删除空 out 目录
+        # 解释：删除空 out 是因为在移动文件后，out 目录可能变成空文件夹，rmdir 命令用于移除空目录，以避免不必要的目录结构上传到服务器
+
+      - name: Deploy to server with SSH key
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DEPLOY_HOST }}         # 目标服务器 IP 或域名（保存在 GitHub Secrets 中）
           username: ${{ secrets.DEPLOY_USER }}     # SSH 用户名
           key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥（用于免密登录）
           port: 22                                 # SSH 端口（默认 22）
-          source: "./out/*"                        # 👈 只上传 out 文件夹下的所有内容
-          target: "/home/wwwroot/www.next.com/"    # 👈 直接放进指定目标路径（不会多一层 out）
-        # 第七步：使用 scp 将 out 目录下的内容上传至服务器指定路径，完成部署
+          source: "./*"                             # 上传根目录下的所有内容
+          target: "/home/wwwroot/www.next.com/"     # 目标路径，直接放入指定目录
+        # 第八步：使用 scp 将根目录内容上传至服务器指定路径，完成部署
