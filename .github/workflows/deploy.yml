@@ -1,42 +1,49 @@
-name: Next.js Static Export and Deploy  # 工作流名称
+name: Next.js Static Export and Deploy  # 工作流名称：用于 Next.js 项目的构建和部署
 
 on:
   push:
     branches:
-      - main  # 监听 main 分支 push 事件
+      - main  # 仅当代码推送到 main 分支时触发工作流
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # 运行环境
+    runs-on: ubuntu-latest  # 使用最新版 Ubuntu 作为运行环境
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        # 第一步：拉取当前仓库的代码到 GitHub Actions runner 环境
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+        # 第二步：安装指定版本的 Node.js（这里是 v18）
 
       - name: Install pnpm
         run: npm install -g pnpm
+        # 第三步：全局安装 pnpm，作为包管理工具
 
       - name: Install dependencies
         run: pnpm install
+        # 第四步：使用 pnpm 安装项目依赖（会根据 pnpm-lock.yaml 安装精准依赖）
 
       - name: Build & Export Next.js static site
         run: |
-          pnpm run build
+          pnpm run build    # 执行 Next.js 构建命令，生成 .next 目录
+          pnpm run export   # 导出为静态站点，输出到 out 文件夹
 
       - name: List files in out directory for debugging
         run: ls -la ./out
+        # 第六步：列出 out 目录内容，用于调试确认静态文件是否正确生成
 
       - name: Deploy `out` folder to server with SSH key
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          source: "./out/"
-          target: "/home/wwwroot/www.next.com/"
+          host: ${{ secrets.DEPLOY_HOST }}         # 目标服务器 IP 或域名（保存在 GitHub Secrets 中）
+          username: ${{ secrets.DEPLOY_USER }}     # SSH 用户名
+          key: ${{ secrets.SSH_PRIVATE_KEY }}      # SSH 私钥（用于免密登录）
+          port: 22                                 # SSH 端口（默认 22）
+          source: "./out/"                         # 本地要上传的目录
+          target: "/home/wwwroot/www.next.com/"   # 远程服务器上的目标路径
+        # 第七步：使用 scp 将 out 目录上传到服务器，完成部署
