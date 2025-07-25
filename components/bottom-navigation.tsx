@@ -206,13 +206,13 @@ export function BottomNavigation() {
             href: "/points-market/my-orders/",
             color: "text-amber-500",
         },
-        {
-            icon: <Bot className="h-5 w-5"/>,
-            labelKey: "onlineService",
-            // href: "/market",
-            href: "/chat/",
-            color: "text-[hsl(var(--secondary))]",
-        },
+        // {
+        //     icon: <Bot className="h-5 w-5"/>,
+        //     labelKey: "onlineService",
+        //     // href: "/market",
+        //     href: "/chat/",
+        //     color: "text-[hsl(var(--secondary))]",
+        // },
         {
             icon: <User className="h-5 w-5"/>,
             labelKey: "profile",
@@ -225,7 +225,7 @@ export function BottomNavigation() {
     const cleanPath = pathname.split("?")[0]
     const showBottomNav = [
         "/market/",
-        "/chat/",
+        // "/chat/",
         "/points-market/my-orders/",
         "/assets/",
         "/profile/",

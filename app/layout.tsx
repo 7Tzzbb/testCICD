@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             <LanguageProvider>
                 {/*<1WalletWatcher />*/}
-                 <ChatwootLauncher />
+                {/* <ChatwootLauncher />*/}
                 <PageTransition>{children}</PageTransition>
                 <Toaster />
             </LanguageProvider>

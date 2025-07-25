@@ -1,8 +1,19 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { ArrowLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import {useLanguage} from "@/lib/i18n/language-context"
 
 export default function ChatwootLauncher() {
+    const { t } = useLanguage()
+    const router = useRouter()
+
+    const toBack = () => {
+        router.back()
+    }
+
     useEffect(() => {
 
         // 设置 Chatwoot 全局配置（隐藏默认按钮）
@@ -165,5 +176,16 @@ export default function ChatwootLauncher() {
         }
     }, [])
 
-    return null
+    return (
+        <>
+            <header className="sticky top-0 z-10 backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border-b border-gray-200 dark:border-gray-700">
+                <div className="container flex items-center h-14 px-4">
+                    <Button variant="ghost" size="icon" onClick={toBack}>
+                        <ArrowLeft className="h-5 w-5" />
+                    </Button>
+                    <h1 className="font-bold text-lg ml-2">{t('onlineService')}</h1>
+                </div>
+            </header>
+        </>
+    )
 }

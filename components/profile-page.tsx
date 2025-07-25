@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BottomNavigation } from "./bottom-navigation";
-import { ChevronRight, Shield, CreditCard, Phone, Copy, Users, HelpCircle, Mail } from "lucide-react";
+import { ChevronRight, Shield, CreditCard, Phone, Copy, Users, HelpCircle, Mail,Bot } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { Progress } from "@/components/ui/progress";
@@ -219,6 +219,14 @@ export default function ProfilePage() {
                                     <div className="flex items-center gap-3">
                                         <HelpCircle className="h-5 w-5 text-accent" />
                                         <span>{t('helpCenter')}</span>
+                                    </div>
+                                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                                </Link>
+                                {/* 在线客服 */}
+                                <Link href="/chat" className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
+                                    <div className="flex items-center gap-3">
+                                        <Bot className="h-5 w-5 text-accent" />
+                                        <span>{t('onlineService')}</span>
                                     </div>
                                     <ChevronRight className="h-4 w-4 text-gray-400" />
                                 </Link>
