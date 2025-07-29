@@ -176,16 +176,5 @@ export default function ChatwootLauncher() {
         }
     }, [])
 
-    return (
-        <>
-            <header className="sticky top-0 z-10 backdrop-blur-md bg-white/80 dark:bg-gray-800/80 border-b border-gray-200 dark:border-gray-700">
-                <div className="container flex items-center h-14 px-4">
-                    <Button variant="ghost" size="icon" onClick={toBack}>
-                        <ArrowLeft className="h-5 w-5" />
-                    </Button>
-                    <h1 className="font-bold text-lg ml-2">{t('onlineService')}</h1>
-                </div>
-            </header>
-        </>
-    )
+    return null
 }

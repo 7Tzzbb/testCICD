@@ -1,24 +1,24 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { BottomNavigation } from "./bottom-navigation";
-import { ChevronRight, Shield, CreditCard, Phone, Copy, Users, HelpCircle, Mail,Bot } from "lucide-react";
+import {useState, useEffect} from "react";
+import {Card, CardContent} from "@/components/ui/card";
+import {Button} from "@/components/ui/button";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {BottomNavigation} from "./bottom-navigation";
+import {ChevronRight, Shield, CreditCard, Phone, Copy, Users, HelpCircle, Mail, Bot} from "lucide-react";
 import Link from "next/link";
-import { useToast } from "@/hooks/use-toast";
-import { Progress } from "@/components/ui/progress";
-import { getProfile, UserProfile } from "@/lib/api";
-import { getAuthToken, setAuthToken, copyToClipboard } from "@/lib/utils";
-import { useLanguage } from "@/lib/i18n/language-context";
+import {useToast} from "@/hooks/use-toast";
+import {Progress} from "@/components/ui/progress";
+import {getProfile, UserProfile} from "@/lib/api";
+import {getAuthToken, setAuthToken, copyToClipboard} from "@/lib/utils";
+import {useLanguage} from "@/lib/i18n/language-context";
 import useWalletStore from "@/store/useWalletStore";
-import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { QRCodeCanvas } from 'qrcode.react';
+import {Badge} from "@/components/ui/badge";
+import {Dialog, DialogContent, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
+import {QRCodeCanvas} from 'qrcode.react';
 
 export default function ProfilePage() {
     const [userProfile, setUserProfile] = useState<UserProfile>(null);
-    const { t } = useLanguage();
-    const { toast } = useToast();
+    const {t} = useLanguage();
+    const {toast} = useToast();
     const [isLoading, setIsLoading] = useState(false);
     const userData = useWalletStore((state) => state.userData); // get wallet store
     const [isInviteModalOpen, setIsInviteModalOpen] = useState(false);
@@ -99,9 +99,11 @@ export default function ProfilePage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 pb-16">
-            <header className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 mobile-slide-up">
+            <header
+                className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 mobile-slide-up">
                 <div className="container flex items-center justify-between h-14 px-4">
-                    <h1 className="font-bold text-lg bg-gradient-to-r from-[#0097FF] to-[#8F4BFF] text-transparent bg-clip-text" style={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                    <h1 className="font-bold text-lg bg-gradient-to-r from-[#0097FF] to-[#8F4BFF] text-transparent bg-clip-text"
+                        style={{WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent"}}>
                         {t('profilePage')}
                     </h1>
                 </div>
@@ -110,31 +112,42 @@ export default function ProfilePage() {
             <main className="flex-1 container px-4 py-4">
                 <div className="space-y-4 mobile-fade-in">
                     {/* 用户信息卡片 */}
-                    <Card className="mb-4 vibrant-gradient vibrant-card hover:shadow-xl transition-all bg-gradient-to-br from-primary/20 to-secondary/20 border-border duration-300">
+                    <Card
+                        className="mb-4 vibrant-gradient vibrant-card hover:shadow-xl transition-all bg-gradient-to-br from-primary/20 to-secondary/20 border-border duration-300">
                         <CardContent className="p-4">
                             <div className="flex items-center gap-4">
                                 <Avatar className="h-16 w-16 border-primary/50 shadow-lg shadow-primary/20">
-                                    <AvatarImage src={userProfile?.avatar || "/head.svg?height=64&width=64"} alt="AvatarImage" />
+                                    <AvatarImage src={userProfile?.avatar || "/head.svg?height=64&width=64"}
+                                                 alt="AvatarImage"/>
                                     <AvatarFallback>USER</AvatarFallback>
                                 </Avatar>
                                 <div className="flex-1">
                                     <div className="flex items-center gap-2">
                                         <div className="flex items-center">
-                                            <h2 className="inline-block max-w-[180px] text-xl font-bold bg-gradient-to-r from-[#13ba82] to-[#0da2e7] text-transparent bg-clip-text whitespace-nowrap overflow-hidden text-ellipsis leading-tight" style={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }} title={userProfile?.userAddr}>
+                                            <h2 className="inline-block max-w-[180px] text-xl font-bold bg-gradient-to-r from-[#13ba82] to-[#0da2e7] text-transparent bg-clip-text whitespace-nowrap overflow-hidden text-ellipsis leading-tight"
+                                                style={{
+                                                    WebkitBackgroundClip: "text",
+                                                    WebkitTextFillColor: "transparent"
+                                                }} title={userProfile?.userAddr}>
                                                 {userProfile?.userAddr ? `${userProfile.userAddr.slice(0, 6)}...${userProfile.userAddr.slice(-4)}` : t('notSet')}
                                             </h2>
-                                            <Button variant="ghost" size="icon" className="h-8 w-8 ml-1 hover:bg-primary/10 transition-colors duration-200" onClick={() => copyWalletAddress(userProfile?.userAddr || '')}>
-                                                <Copy className="h-4 w-4 text-primary" />
+                                            <Button variant="ghost" size="icon"
+                                                    className="h-8 w-8 ml-1 hover:bg-primary/10 transition-colors duration-200"
+                                                    onClick={() => copyWalletAddress(userProfile?.userAddr || '')}>
+                                                <Copy className="h-4 w-4 text-primary"/>
                                             </Button>
                                         </div>
                                     </div>
-                                    <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 animate-pulse">
+                                    <Badge variant="outline"
+                                           className="bg-green-50 text-green-700 border-green-200 animate-pulse">
                                         {t('verified')}
                                     </Badge>
                                     <div className="flex items-center">
                                         <p className="text-sm text-gray-500 dark:text-gray-400">ID: {userProfile?.userId || t('notSet')}</p>
-                                        <Button variant="ghost" size="icon" className="h-6 w-6 ml-1 hover:bg-primary/10 transition-colors duration-200" onClick={() => copyUserId(userProfile?.userId || '')}>
-                                            <Copy className="h-3 w-3 text-primary" />
+                                        <Button variant="ghost" size="icon"
+                                                className="h-6 w-6 ml-1 hover:bg-primary/10 transition-colors duration-200"
+                                                onClick={() => copyUserId(userProfile?.userId || '')}>
+                                            <Copy className="h-3 w-3 text-primary"/>
                                         </Button>
                                     </div>
                                 </div>
@@ -145,26 +158,32 @@ export default function ProfilePage() {
                                 <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-md">
                                     <div className="flex items-center justify-between mb-1">
                                         <div className="flex items-center gap-1">
-                                            <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
+                                            <div
+                                                className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
                                                 <div className="w-2 h-2 rounded-full bg-primary"></div>
                                             </div>
-                                            <span className="text-xs text-gray-600 dark:text-gray-400">{t('creditScore')}</span>
+                                            <span
+                                                className="text-xs text-gray-600 dark:text-gray-400">{t('creditScore')}</span>
                                         </div>
-                                        <span className="text-xs font-medium text-primary">{userProfile?.creditScore || 0}</span>
+                                        <span
+                                            className="text-xs font-medium text-primary">{userProfile?.creditScore || 0}</span>
                                     </div>
-                                    <Progress value={userProfile?.creditScore || 0} className="h-2 bg-primary/10" />
+                                    <Progress value={userProfile?.creditScore || 0} className="h-2 bg-primary/10"/>
                                 </div>
                                 <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-md">
                                     <div className="flex items-center justify-between mb-1">
                                         <div className="flex items-center gap-1">
-                                            <div className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
+                                            <div
+                                                className="w-4 h-4 rounded-full bg-primary/20 flex items-center justify-center">
                                                 <div className="w-2 h-2 rounded-full bg-primary"></div>
                                             </div>
-                                            <span className="text-xs text-gray-600 dark:text-gray-400">{t('activityScore')}</span>
+                                            <span
+                                                className="text-xs text-gray-600 dark:text-gray-400">{t('activityScore')}</span>
                                         </div>
-                                        <span className="text-xs font-medium text-primary">{userProfile?.activityLevel || 0}</span>
+                                        <span
+                                            className="text-xs font-medium text-primary">{userProfile?.activityLevel || 0}</span>
                                     </div>
-                                    <Progress value={userProfile?.activityLevel || 0} className="h-2 bg-primary/10" />
+                                    <Progress value={userProfile?.activityLevel || 0} className="h-2 bg-primary/10"/>
                                 </div>
                             </div>
                         </CardContent>
@@ -175,60 +194,68 @@ export default function ProfilePage() {
                         <CardContent className="p-0">
                             <div className="divide-y">
                                 {/* 账户安全 */}
-                                <Link href="/security" className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
+                                <Link href="/security"
+                                      className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
                                     <div className="flex items-center gap-3">
-                                        <Shield className="h-5 w-5 text-primary" />
+                                        <Shield className="h-5 w-5 text-primary"/>
                                         <span>{t('accountSecurity')}</span>
                                     </div>
-                                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                                    <ChevronRight className="h-4 w-4 text-gray-400"/>
                                 </Link>
                                 {/* 收款方式 */}
-                                <Link href="/collection-method" className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
+                                <Link href="/collection-method"
+                                      className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
                                     <div className="flex items-center gap-3">
-                                        <CreditCard className="h-5 w-5 text-secondary" />
+                                        <CreditCard className="h-5 w-5 text-secondary"/>
                                         <span>{t('paymentMethods')}</span>
                                     </div>
-                                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                                    <ChevronRight className="h-4 w-4 text-gray-400"/>
                                 </Link>
                                 {/* 联系方式 */}
-                                <Link href="/contact-method" className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
+                                <Link href="/contact-method"
+                                      className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
                                     <div className="flex items-center gap-3">
-                                        <Phone className="h-5 w-5 text-accent" />
+                                        <Phone className="h-5 w-5 text-accent"/>
                                         <span>{t('contactMethods')}</span>
                                     </div>
-                                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                                    <ChevronRight className="h-4 w-4 text-gray-400"/>
                                 </Link>
                                 {/* 邀请好友 */}
-                                <div className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200 cursor-pointer" onClick={() => setIsInviteModalOpen(true)}>
+                                <div
+                                    className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200 cursor-pointer"
+                                    onClick={() => setIsInviteModalOpen(true)}>
                                     <div className="flex items-center gap-3">
-                                        <Users className="h-5 w-5 text-primary" />
+                                        <Users className="h-5 w-5 text-primary"/>
                                         <span>{t('inviteFriends')}</span>
                                     </div>
-                                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                                    <ChevronRight className="h-4 w-4 text-gray-400"/>
                                 </div>
                                 {/* 公告 */}
-                                <Link href="/notice-list" className="flex items-center justify-between p-4 hover:bg-secondary/5 transition-colors duration-200">
+                                <Link href="/notice-list"
+                                      className="flex items-center justify-between p-4 hover:bg-secondary/5 transition-colors duration-200">
                                     <div className="flex items-center gap-3">
-                                        <Mail className="h-5 w-5 text-secondary" />
+                                        <Mail className="h-5 w-5 text-secondary"/>
                                         <span>{t('announcementCenter')}</span>
                                     </div>
-                                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                                    <ChevronRight className="h-4 w-4 text-gray-400"/>
                                 </Link>
                                 {/* 帮助中心 */}
-                                <Link href="/helpcenter-list" className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
+                                <Link href="/helpcenter-list"
+                                      className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
                                     <div className="flex items-center gap-3">
-                                        <HelpCircle className="h-5 w-5 text-accent" />
+                                        <HelpCircle className="h-5 w-5 text-accent"/>
                                         <span>{t('helpCenter')}</span>
                                     </div>
-                                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                                    <ChevronRight className="h-4 w-4 text-gray-400"/>
                                 </Link>
                                 {/* 在线客服 */}
-                                <Link href="/chat" className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
+                                <Link href="/chat"
+                                      className="flex items-center justify-between p-4 hover:bg-primary/5 transition-colors duration-200">
                                     <div className="flex items-center gap-3">
-                                        <Bot className="h-5 w-5 text-accent" />
+                                        <Bot className="h-5 w-5 text-primary"/>
                                         <span>{t('onlineService')}</span>
                                     </div>
-                                    <ChevronRight className="h-4 w-4 text-gray-400" />
+                                    <ChevronRight className="h-4 w-4 text-gray-400"/>
                                 </Link>
                             </div>
                         </CardContent>
@@ -243,7 +270,8 @@ export default function ProfilePage() {
                         {t('inviteFriends')}
                     </DialogTitle>
                     <div className="flex flex-col items-center justify-center p-4">
-                        <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 shadow-md">
+                        <div
+                            className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 shadow-md">
                             <QRCodeCanvas
                                 value={window.location.href + userProfile?.userAddr}
                                 size={256}
@@ -254,7 +282,7 @@ export default function ProfilePage() {
                     </div>
                 </DialogContent>
             </Dialog>
-            <BottomNavigation  />
+            <BottomNavigation/>
         </div>
     );
 }
