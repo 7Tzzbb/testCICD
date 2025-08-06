@@ -3,7 +3,8 @@ import {ApiResponse} from "./types";
 import {getAuthToken} from "./utils";
 import useWalletStore from "@/store/useWalletStore";
 
-const API_BASE_URL = 'http://18.140.71.200:8080/api';
+const API_BASE_URL = 'http://47.130.145.91:8081/api';
+// const API_BASE_URL = 'http://18.140.71.200:8080/api';
 // const API_BASE_URL = 'http://192.168.1.17:8080/api';
 
 const apiClient: AxiosInstance = axios.create({
