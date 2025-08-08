@@ -202,7 +202,7 @@ export default function AssetMydetailPage() {
             case 3:
                 return t('depositAction')
             case 4:
-                return t('withdrawAction')
+                return t('pushInfo')
         }
     }
     // 格式化背景色
@@ -346,7 +346,7 @@ export default function AssetMydetailPage() {
                                             onClick={handleTransferIn}
                                         >
                                             <ArrowDownRight className="h-4 w-4 mr-1"/>
-                                            {t('depositAsset')}
+                                            {t('withdrawAsset')}
                                         </Button>
                                         <Button
                                             variant="secondary"
@@ -354,7 +354,7 @@ export default function AssetMydetailPage() {
                                             onClick={handleTransferOut}
                                         >
                                             <ArrowUpRight className="h-4 w-4 mr-1"/>
-                                            {t('withdrawAsset')}
+                                            {t('pushPointsInfo')}
                                         </Button>
                                         <Button
                                             variant="secondary"
@@ -397,7 +397,7 @@ export default function AssetMydetailPage() {
                                 <TabsList className="grid w-full grid-cols-3">
                                     <TabsTrigger value="ALL">{t('all')}</TabsTrigger>
                                     <TabsTrigger value="BUY_AND_SELL">{t('buySell')}</TabsTrigger>
-                                    <TabsTrigger value="TRANSFER_IN_AND_OUT">{t('depositWithdraw')}</TabsTrigger>
+                                    <TabsTrigger value="TRANSFER_IN_AND_OUT">{t('getOrPushInfo')}</TabsTrigger>
                                 </TabsList>
                             </Tabs>
 

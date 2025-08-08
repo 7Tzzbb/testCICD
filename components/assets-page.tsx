@@ -519,7 +519,7 @@ export default function AssetsPage() {
                                                                     <ArrowDownLeft className="h-5 w-5 text-red-500"/>}
                                                             </div>
                                                             <div>
-                                                                <h3 className="font-medium">{transaction.type == 1 ? t('depositAction') : t('withdrawAction')} {transaction.assetName}</h3>
+                                                                <h3 className="font-medium">{transaction.type == 1 ? t('depositAction') : t('pushInfo')} {transaction.assetName}</h3>
                                                                 <div className="flex items-center">
                                                                 <span
                                                                     className="text-sm text-gray-500 dark:text-gray-400">{transaction.createdAt}</span>

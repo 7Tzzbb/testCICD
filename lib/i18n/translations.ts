@@ -779,10 +779,21 @@ export interface Translations {
     updateSuccess1: string
     contactAdded: string
     addSuccess1: string
+    pushPointsInfo: string
+    pushInfo: string
+    getOrPushInfo: string
+
+
 }
 
 // 中文翻译
 export const zhTranslations: Translations = {
+    getOrPushInfo: "获取信息/推送信息",
+
+    pushInfo: "推送信息",
+
+    pushPointsInfo: "推送积分信息",
+
     onlineService: "在线客服",
     contactUpdated: "联系方式已更新",
     updateSuccess1: "已成功更新",
@@ -1557,6 +1568,12 @@ export const zhTranslations: Translations = {
 
 // 英文翻译
 export const enTranslations: Translations = {
+    getOrPushInfo: "Get/Push Information",
+
+    pushInfo: "Push Information",
+
+    pushPointsInfo: "Push Points Information",
+
     "error.helpCenter_was_not_found": "Help center not found",
     noDatas: "None",
     minimumPurchaseQuantity: "Minimum Purchase Quantity",
@@ -2275,8 +2292,14 @@ export const enTranslations: Translations = {
 
 // 阿拉伯语翻译
 export const arTranslations: Translations = {
+    getOrPushInfo: "الحصول على/إرسال المعلومات",
+
+    pushInfo: "إرسال المعلومات",
+
+    pushPointsInfo: "إرسال معلومات النقاط",
+
     "error.helpCenter_was_not_found": "لم يتم العثور على مركز المساعدة",
-    noDatas:  "لا يوجد",
+    noDatas: "لا يوجد",
     "minimumPurchaseQuantity": "الحد الأدنى لكمية الشراء",
     onlineService: "الدعم عبر الإنترنت",
     contactUpdated: "تم تحديث معلومات الاتصال",
@@ -2974,6 +2997,12 @@ export const arTranslations: Translations = {
 
 // 日语翻译
 export const jaTranslations: Translations = {
+    getOrPushInfo: "情報の取得／プッシュ",
+
+    pushInfo: "情報をプッシュ",
+
+    pushPointsInfo: "ポイント情報をプッシュ",
+
     noDatas: "なし",
     minimumPurchaseQuantity: "最低購入数量",
     onlineService: "オンラインカスタマーサービス",
@@ -3695,6 +3724,9 @@ export const jaTranslations: Translations = {
 
 // 韩语翻译
 export const koTranslations: Translations = {
+    getOrPushInfo: "정보 가져오기/푸시",
+    pushPointsInfo: "포인트 정보 푸시",
+    pushInfo: "정보 푸시",
     noDatas: "없음",
     "minimumPurchaseQuantity": "최소 구매 수량",
     onlineService: "온라인 고객센터",

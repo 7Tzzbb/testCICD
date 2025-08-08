@@ -206,7 +206,7 @@ export default function TransferInPage() {
                         <Button variant="ghost" size="icon" className="mr-2" asChild onClick={handleCancel}>
                             <ArrowLeft className="h-5 w-5"/>
                         </Button>
-                        <h1 className="font-bold text-lg">{t('depositAsset')}</h1>
+                        <h1 className="font-bold text-lg">{t('withdrawAsset')}</h1>
                     </div>
                 </header>
 

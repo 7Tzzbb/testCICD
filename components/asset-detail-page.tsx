@@ -181,11 +181,11 @@ export default function AssetDetailPage() {
                 if (row.userIdBuy == localStorage.getItem('userId')) {
                     return t('depositAction') // 转入
                 } else {
-                    return t('withdrawAction') // 转出
+                    return t('pushInfo') // 转出
                 }
             case 2:
                 if (row.userIdBuy == localStorage.getItem('userId')) {
-                    return t('withdrawAction') // 转出
+                    return t('pushInfo') // 转出
                 } else {
                     return t('depositAction') // 转入
                 }
@@ -319,7 +319,7 @@ export default function AssetDetailPage() {
                                         onClick={handleTransferIn}
                                     >
                                         <ArrowDownRight className="h-4 w-4 mr-1"/>
-                                        {t('depositAsset')}
+                                        {t('withdrawAsset')}
                                     </Button>
                                     <Button
                                         variant="secondary"
@@ -327,7 +327,7 @@ export default function AssetDetailPage() {
                                         onClick={handleTransferOut}
                                     >
                                         <ArrowUpRight className="h-4 w-4 mr-1"/>
-                                        {t('withdrawAsset')}
+                                        {t('pushPointsInfo')}
                                     </Button>
                                     <Button
                                         variant="secondary"
@@ -359,7 +359,7 @@ export default function AssetDetailPage() {
                                   onValueChange={(value) => handleCurrencyChange(value)}>
                                 <TabsList className="grid w-full grid-cols-3">
                                     <TabsTrigger value="0">{t('all')}</TabsTrigger>
-                                    <TabsTrigger value="1">{t('depositWithdraw')}</TabsTrigger>
+                                    <TabsTrigger value="1">{t('getOrPushInfo')}</TabsTrigger>
                                     <TabsTrigger value="2">{t('buySell')}</TabsTrigger>
                                 </TabsList>
                             </Tabs>

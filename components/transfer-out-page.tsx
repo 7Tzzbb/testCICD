@@ -158,7 +158,7 @@ export default function TransferOutPage() {
                         <Button variant="ghost" size="icon" className="mr-2" asChild onClick={handleCancel}>
                             <ArrowLeft className="h-5 w-5"/>
                         </Button>
-                        <h1 className="font-bold text-lg">{t('withdrawAsset')}</h1>
+                        <h1 className="font-bold text-lg">{t('pushPointsInfo')}</h1>
                     </div>
                 </header>
 
@@ -192,7 +192,7 @@ export default function TransferOutPage() {
                         <ArrowLeft className="h-5 w-5"/>
                     </Button>
                     <div className="flex items-center">
-                        <h1 className="font-bold text-lg">{t('withdrawAction')}{asset.assetsName}</h1>
+                        <h1 className="font-bold text-lg">{t('pushInfo')}{asset.assetsName}</h1>
                     </div>
                     <span className={`ml-2 px-2 py-1 text-xs rounded-full ${getTypeColor(asset.type)}`}>
                     {asset.type == 1 ? '积分' : 'RWA'}

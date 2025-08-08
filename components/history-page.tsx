@@ -142,7 +142,7 @@ export default function AssetsHistoryPage() {
                             <TabsList className="grid w-full grid-cols-3">
                                 <TabsTrigger value="0">{t('all')}</TabsTrigger>
                                 <TabsTrigger value="1">{t('depositAction')}</TabsTrigger>
-                                <TabsTrigger value="2">{t('withdrawAction')}</TabsTrigger>
+                                <TabsTrigger value="2">{t('pushInfo')}</TabsTrigger>
                             </TabsList>
                         </Tabs>
 
@@ -167,7 +167,7 @@ export default function AssetsHistoryPage() {
                                                                 <ArrowDownLeft className="h-5 w-5 text-red-500"/>}
                                                         </div>
                                                         <div>
-                                                            <h3 className="font-medium">{transaction.type == 1 ? t('depositAction') : t('withdrawAction')} {transaction.assetName}</h3>
+                                                            <h3 className="font-medium">{transaction.type == 1 ? t('depositAction') : t('pushInfo')} {transaction.assetName}</h3>
                                                             <div className="flex items-center">
                                                                 <span
                                                                     className="text-sm text-gray-500 dark:text-gray-400">{transaction.createdAt}</span>
