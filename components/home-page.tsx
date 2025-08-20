@@ -35,7 +35,7 @@ export default function HomePage() {
         getNoticeList()
         getActivity()
         getAssetsPage('1')
-        getHotTransactions()
+        // getHotTransactions()
     }, [])
     // 切换语言
     const changeLang = () => {
@@ -419,44 +419,44 @@ export default function HomePage() {
                     </Card>
                 </ScrollReveal>
                 {/*  热门交易*/}
-                <ScrollReveal>
-                    <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
-                        <CardContent className="p-4">
-                            <div className="flex items-center mb-2">
-                                <h3 className="font-semibold">{t('hotTransactions')}</h3>
-                            </div>
-                            <div className="space-y-2">
-                                <InfiniteScroll
-                                    dataLength={hotTransactions.length}
-                                    next={getHotTransactions}
-                                    hasMore={hasMore}
-                                    loader={<h4>{t('loading')}</h4>}
-                                    endMessage={<p style={{textAlign: 'center'}}>{t('noData')}</p>}
-                                    scrollableTarget="scrollableDiv">
-                                    {
-                                        hotTransactions.map((item, index) => (
-                                            <motion.div
-                                                key={index}
-                                                className="flex items-center justify-between p-2 bg-gradient-to-r from-[hsl(var(--pastel-blue))] to-[hsl(var(--pastel-green))] rounded-md mb-2"
-                                                whileHover={{scale: 1.02, y: -2}}
-                                                transition={{type: "spring", stiffness: 400, damping: 10}}
-                                            >
-                                                <div className="flex items-center gap-2">
-                                                    <Badge variant="outline"
-                                                           className="bg-white/50 backdrop-blur-sm text-cyan-500">
-                                                        {item.type == 1 ? t('placeBuyOrder') : t('placeSellOrder')}
-                                                    </Badge>
-                                                    <span className="text-sm">{item.assetName}-{item.amount}</span>
-                                                </div>
-                                                <span className="text-sm font-medium">{item.price}</span>
-                                            </motion.div>
-                                        ))
-                                    }
-                                </InfiniteScroll>
-                            </div>
-                        </CardContent>
-                    </Card>
-                </ScrollReveal>
+                {/*<ScrollReveal>*/}
+                {/*    <Card className="bg-white/80 backdrop-blur-sm hover:shadow-lg transition-all duration-300">*/}
+                {/*        <CardContent className="p-4">*/}
+                {/*            <div className="flex items-center mb-2">*/}
+                {/*                <h3 className="font-semibold">{t('hotTransactions')}</h3>*/}
+                {/*            </div>*/}
+                {/*            <div className="space-y-2">*/}
+                {/*                <InfiniteScroll*/}
+                {/*                    dataLength={hotTransactions.length}*/}
+                {/*                    next={getHotTransactions}*/}
+                {/*                    hasMore={hasMore}*/}
+                {/*                    loader={<h4>{t('loading')}</h4>}*/}
+                {/*                    endMessage={<p style={{textAlign: 'center'}}>{t('noData')}</p>}*/}
+                {/*                    scrollableTarget="scrollableDiv">*/}
+                {/*                    {*/}
+                {/*                        hotTransactions.map((item, index) => (*/}
+                {/*                            <motion.div*/}
+                {/*                                key={index}*/}
+                {/*                                className="flex items-center justify-between p-2 bg-gradient-to-r from-[hsl(var(--pastel-blue))] to-[hsl(var(--pastel-green))] rounded-md mb-2"*/}
+                {/*                                whileHover={{scale: 1.02, y: -2}}*/}
+                {/*                                transition={{type: "spring", stiffness: 400, damping: 10}}*/}
+                {/*                            >*/}
+                {/*                                <div className="flex items-center gap-2">*/}
+                {/*                                    <Badge variant="outline"*/}
+                {/*                                           className="bg-white/50 backdrop-blur-sm text-cyan-500">*/}
+                {/*                                        {item.type == 1 ? t('placeBuyOrder') : t('placeSellOrder')}*/}
+                {/*                                    </Badge>*/}
+                {/*                                    <span className="text-sm">{item.assetName}-{item.amount}</span>*/}
+                {/*                                </div>*/}
+                {/*                                <span className="text-sm font-medium">{item.price}</span>*/}
+                {/*                            </motion.div>*/}
+                {/*                        ))*/}
+                {/*                    }*/}
+                {/*                </InfiniteScroll>*/}
+                {/*            </div>*/}
+                {/*        </CardContent>*/}
+                {/*    </Card>*/}
+                {/*</ScrollReveal>*/}
             </main>
 
             {/* 底部导航 */}

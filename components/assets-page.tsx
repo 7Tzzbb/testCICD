@@ -122,7 +122,8 @@ export default function AssetsPage() {
         const res = await assetStatementTotalAsset()
         if (res.code == 0) {
             setUserTotal(res.data)
-            setTotalAmount('￥' + res.data.totalValues)
+            setTotalAmount('￥' + res.data.totalBalance)
+            // setTotalAmount('≈ ' + res.data.totalBalance)
         } else {
             setIsLoading(false)
             toast({
@@ -171,7 +172,7 @@ export default function AssetsPage() {
         setCurrency(value)
         const res = await exchangeRate(value)
         if (res.code == 0) {
-            const convertedValue = userTotal.totalValues * res.data.rate
+            const convertedValue = userTotal.totalBalance * res.data.rate
             setTotalAmount(`${currencySymbols[value]} ${convertedValue.toLocaleString(undefined, {maximumFractionDigits: 2})}`)
         } else {
             toast({
@@ -371,53 +372,53 @@ export default function AssetsPage() {
                                     </div>
 
                                     {/* 钱包地址显示 */}
-                                    <div className="mb-4 p-3 bg-white/10 rounded-lg border border-white/20">
-                                        <div className="flex items-center justify-between">
-                                            <div className="flex-1">
-                                                <p className="text-xm text-white mb-1">{t('custodyWalletBalance')}：{userTotal.totalBalance}</p>
-                                            </div>
-                                            <Button
-                                                variant="ghost"
-                                                size="sm"
-                                                className="ml-2 h-8 w-8 p-0 text-white hover:bg-white/20"
-                                                onClick={handleRefreshWallet}
-                                            >
-                                                <RefreshCwIcon className="h-4 w-4"/>
-                                            </Button>
-                                        </div>
-                                    </div>
+                                    {/*<div className="mb-4 p-3 bg-white/10 rounded-lg border border-white/20">*/}
+                                    {/*    <div className="flex items-center justify-between">*/}
+                                    {/*        <div className="flex-1">*/}
+                                    {/*            <p className="text-xm text-white mb-1">{t('custodyWalletBalance')}：{userTotal.totalBalance}</p>*/}
+                                    {/*        </div>*/}
+                                    {/*        <Button*/}
+                                    {/*            variant="ghost"*/}
+                                    {/*            size="sm"*/}
+                                    {/*            className="ml-2 h-8 w-8 p-0 text-white hover:bg-white/20"*/}
+                                    {/*            onClick={handleRefreshWallet}*/}
+                                    {/*        >*/}
+                                    {/*            <RefreshCwIcon className="h-4 w-4"/>*/}
+                                    {/*        </Button>*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
 
-                                    <div className="items-center grid grid-cols-3 gap-3">
-                                        <Button
-                                            variant="secondary"
-                                            size="sm"
-                                            className="bg-white/20 hover:bg-white/30 text-white hover-scale"
-                                            onClick={handleTransferIn}
-                                        >
-                                            <ArrowUpRight className="h-4 w-4 mr-1"/>
-                                            {t('transferInBalance')}
-                                        </Button>
-                                        <Button
-                                            variant="secondary"
-                                            size="sm"
-                                            className="bg-white/20 hover:bg-white/30 text-white hover-scale"
-                                            onClick={handleTransferOut}
-                                        >
-                                            <ArrowDownLeft className="h-4 w-4 mr-1"/>
-                                            {t('withdrawBalance')}
-                                        </Button>
-                                        <Button
-                                            variant="secondary"
-                                            size="sm"
-                                            className="bg-white/20 hover:bg-white/30 text-white hover-scale"
-                                            asChild
-                                        >
-                                            <Link href="/assets/history">
-                                                <Clock className="h-4 w-4 mr-1"/>
-                                                {t('changeRecord')}
-                                            </Link>
-                                        </Button>
-                                    </div>
+                                    {/*<div className="items-center grid grid-cols-3 gap-3">*/}
+                                    {/*    <Button*/}
+                                    {/*        variant="secondary"*/}
+                                    {/*        size="sm"*/}
+                                    {/*        className="bg-white/20 hover:bg-white/30 text-white hover-scale"*/}
+                                    {/*        onClick={handleTransferIn}*/}
+                                    {/*    >*/}
+                                    {/*        <ArrowUpRight className="h-4 w-4 mr-1"/>*/}
+                                    {/*        {t('transferInBalance')}*/}
+                                    {/*    </Button>*/}
+                                    {/*    <Button*/}
+                                    {/*        variant="secondary"*/}
+                                    {/*        size="sm"*/}
+                                    {/*        className="bg-white/20 hover:bg-white/30 text-white hover-scale"*/}
+                                    {/*        onClick={handleTransferOut}*/}
+                                    {/*    >*/}
+                                    {/*        <ArrowDownLeft className="h-4 w-4 mr-1"/>*/}
+                                    {/*        {t('withdrawBalance')}*/}
+                                    {/*    </Button>*/}
+                                    {/*    <Button*/}
+                                    {/*        variant="secondary"*/}
+                                    {/*        size="sm"*/}
+                                    {/*        className="bg-white/20 hover:bg-white/30 text-white hover-scale"*/}
+                                    {/*        asChild*/}
+                                    {/*    >*/}
+                                    {/*        <Link href="/assets/history">*/}
+                                    {/*            <Clock className="h-4 w-4 mr-1"/>*/}
+                                    {/*            {t('changeRecord')}*/}
+                                    {/*        </Link>*/}
+                                    {/*    </Button>*/}
+                                    {/*</div>*/}
                                 </CardContent>
                             </Card>
 
@@ -496,7 +497,7 @@ export default function AssetsPage() {
                                 <div className="flex justify-between items-center mb-3">
                                     <h3 className="font-medium text-lg">{t('recentTransactions')}</h3>
                                     <Button variant="ghost" size="sm" className="text-primary hover-scale" asChild>
-                                        <Link href="/assets/history">
+                                        <Link href="/assets/assets-history">
                                             {t('allRecords')}
                                             <ChevronRight className="h-4 w-4 ml-1"/>
                                         </Link>

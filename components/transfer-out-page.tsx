@@ -10,7 +10,7 @@ import {useToast} from "@/hooks/use-toast"
 import {useRouter, useSearchParams} from "next/navigation"
 import {motion} from "framer-motion"
 import {useLanguage} from "@/lib/i18n/language-context";
-import {assetStatementRecordAdd, getAssetStatementDetail} from "@/lib/api";
+import {assetStatementRecordAdd, assetStatementRecordAddOut, getAssetStatementDetail} from "@/lib/api";
 
 interface Asset {
     id: string
@@ -104,11 +104,9 @@ export default function TransferOutPage() {
 
         // 转出处理
         setIsSubmitting(true)
-        const res = await assetStatementRecordAdd({
-            type: 4, // 转出
+        const res = await assetStatementRecordAddOut({
             "assetId": asset.assetsId,
-            "fromUid": localStorage.getItem('userId'),
-            // "toUid": receiverAddress,
+            "uaddr": receiverAddress,
             "transactionValue": transferAmount,
         })
         if (res.code == 0) {
@@ -234,6 +232,7 @@ export default function TransferOutPage() {
                                         placeholder={t('enterReceiverAddress')}
                                         value={receiverAddress}
                                         disabled
+                                        onChange={(e) => setReceiverAddress(e.target.value)}
                                         className="bg-primary/5 hover:bg-primary/10 focus:bg-white dark:focus:bg-gray-800 transition-colors"
                                     />
                                     {/*onChange={(e) => setReceiverAddress(e.target.value)}*/}

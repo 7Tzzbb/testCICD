@@ -540,7 +540,6 @@ export default function PointDetailPage() {
                                     </ComposedChart>
                                 </ChartContainer>
                             </div>
-
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg">
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{t('currentPrice')}</p>

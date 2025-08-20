@@ -38,23 +38,8 @@ export default function AssetsHistoryPage() {
     useEffect(() => {
         setAssetStatementRecords([])
         getAssetStatementRecordList(1, 0)
-        getUserTotal()
     }, [])
-    const [userTotal, setUserTotal] = useState({})
-    // 获取资产
-    const getUserTotal = async () => {
-        const res = await assetStatementTotalAsset()
-        if (res.code == 0) {
-            setUserTotal(res.data)
-        } else {
-            setIsLoading(false)
-            toast({
-                title: t('tip'),
-                description: t(res.message),
-                duration: 1500
-            })
-        }
-    }
+
     // 个人变动记录
     const getAssetStatementRecordList = async (customPage?: number, type?: any) => {
         const currentPage = customPage || page
@@ -109,7 +94,7 @@ export default function AssetsHistoryPage() {
                             <ArrowLeft className="h-5 w-5"/>
                         </Link>
                     </Button>
-                    <h1 className="font-bold text-lg">{t('changeRecord')}</h1>
+                    <h1 className="font-bold text-lg">{t('recentTransactions')}</h1>
                 </div>
             </header>
 
@@ -125,24 +110,13 @@ export default function AssetsHistoryPage() {
                     </div>
                 ) : (
                     <div className="space-y-4">
-                        {/* 余额统计卡片 */}
-                        <Card className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-                            <CardContent className="p-4">
-                                <div className="text-center">
-                                    {/*currentUSDTBalance*/}
-                                    <p className="text-sm opacity-90">{t('accountBalance')}</p>
-                                    <p className="text-2xl font-bold">{userTotal.totalBalance}</p>
-                                    <p className="text-xs opacity-75">≈ ¥{(userTotal.totalValues)}</p>
-                                </div>
-                            </CardContent>
-                        </Card>
 
                         <Tabs defaultValue="0" className="w-full"
                               onValueChange={(value) => handleCurrencyChange(value)}>
                             <TabsList className="grid w-full grid-cols-3">
                                 <TabsTrigger value="0">{t('all')}</TabsTrigger>
-                                <TabsTrigger value="1">{t('common.transfer_in')}</TabsTrigger>
-                                <TabsTrigger value="2">{t('common.transfer_out')}</TabsTrigger>
+                                <TabsTrigger value="1">{t('depositAction')}</TabsTrigger>
+                                <TabsTrigger value="2">{t('pushInfo')}</TabsTrigger>
                             </TabsList>
                         </Tabs>
 

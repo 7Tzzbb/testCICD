@@ -10,7 +10,13 @@ import {useRouter, useSearchParams} from "next/navigation"
 import {motion} from "framer-motion"
 import {useLanguage} from "@/lib/i18n/language-context";
 import {Input} from "@/components/ui/input";
-import {assetStatementRecordAdd, getAssetStatementDetail, getUserUid} from "@/lib/api";
+import {
+    assetStatementRecordAdd,
+    assetStatementRecordAddInto,
+    assetStatementRecordAddOut,
+    getAssetStatementDetail,
+    getUserUid
+} from "@/lib/api";
 import {QRCodeCanvas} from "qrcode.react";
 import {copyToClipboard} from "@/lib/utils";
 
@@ -89,6 +95,10 @@ export default function TransferInPage() {
             }
         }
     }
+    const handleUaddrChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value
+        setTokenAddress(value)
+    }
     // 处理复制地址
     const handleCopyAddress = async () => {
 
@@ -138,34 +148,30 @@ export default function TransferInPage() {
     }
     // 处理确认转出
     const handleConfirm = async () => {
-        if (!tokenAddress) {
-            toast({
-                title: t('enterReceiverAddress'),
-                description: t('receiverAddressRequired'),
-                variant: "destructive",
-                duration: 1500
-            })
-            return
-        }
-
-        if (!transferAmount || parseFloat(transferAmount) <= 0) {
-            toast({
-                title: t('enterValidAmount'),
-                description: t('amountGreaterThanZero'),
-                variant: "destructive",
-                duration: 1500
-            })
-            return
-        }
+        // if (!tokenAddress) {
+        //     toast({
+        //         title: t('enterReceiverAddress'),
+        //         description: t('receiverAddressRequired'),
+        //         variant: "destructive",
+        //         duration: 1500
+        //     })
+        //     return
+        // }
+        //
+        // if (!transferAmount || parseFloat(transferAmount) <= 0) {
+        //     toast({
+        //         title: t('enterValidAmount'),
+        //         description: t('amountGreaterThanZero'),
+        //         variant: "destructive",
+        //         duration: 1500
+        //     })
+        //     return
+        // }
 
         // 转入处理
         setIsSubmitting(true)
-        const res = await assetStatementRecordAdd({
-            type: 3, // 入
+        const res = await assetStatementRecordAddInto({
             "assetId": asset.assetsId,
-            "fromUid": localStorage.getItem('userId'),
-            // "toUid": tokenAddress,
-            "transactionValue": transferAmount,
         })
         if (res.code == 0) {
             setIsSubmitting(false)
@@ -257,89 +263,89 @@ export default function TransferInPage() {
                     transition={{duration: 0.5}}
                 >
                     {/* 转出详情 */}
-                    <motion.div
-                        initial={{opacity: 0, y: 10}}
-                        animate={{opacity: 1, y: 0}}
-                        transition={{delay: 0.1, duration: 0.4}}
-                        className="w-full"
-                    >
-                        <Card
-                            className="w-full mb-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-4 border-t-primary vibrant-card hover-glow">
-                            <CardContent className="p-4">
-                                <h2 className="text-lg font-medium mb-4 flex items-center">
-                  <span className="bg-primary/20 text-primary p-1 rounded-md mr-2">
-                    <ArrowUpRight className="h-4 w-4"/>
-                  </span>
-                                    {t('transferInDetail')}
-                                </h2>
+                  {/*  <motion.div*/}
+                  {/*      initial={{opacity: 0, y: 10}}*/}
+                  {/*      animate={{opacity: 1, y: 0}}*/}
+                  {/*      transition={{delay: 0.1, duration: 0.4}}*/}
+                  {/*      className="w-full"*/}
+                  {/*  >*/}
+                  {/*      <Card*/}
+                  {/*          className="w-full mb-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-4 border-t-primary vibrant-card hover-glow">*/}
+                  {/*          <CardContent className="p-4">*/}
+                  {/*              <h2 className="text-lg font-medium mb-4 flex items-center">*/}
+                  {/*<span className="bg-primary/20 text-primary p-1 rounded-md mr-2">*/}
+                  {/*  <ArrowUpRight className="h-4 w-4"/>*/}
+                  {/*</span>*/}
+                  {/*                  {t('transferInDetail')}*/}
+                  {/*              </h2>*/}
 
-                                {/* 接收平台地址 */}
-                                <div className="mb-4">
-                                    <label htmlFor="receiver-address" className="block text-sm font-medium mb-1">
-                                        {t('receiverPlatformAddress')}
-                                    </label>
-                                    <Input
-                                        id="receiver-address"
-                                        placeholder={t('enterReceiverAddress')}
-                                        value={tokenAddress}
-                                        disabled
-                                        className="bg-primary/5 hover:bg-primary/10 focus:bg-white dark:focus:bg-gray-800 transition-colors"
-                                    />
-                                    {/* onChange={(e) => setReceiverAddress(e.target.value)} */}
-                                </div>
+                  {/*              /!* 接收平台地址 *!/*/}
+                  {/*              <div className="mb-4">*/}
+                  {/*                  <label htmlFor="receiver-address" className="block text-sm font-medium mb-1">*/}
+                  {/*                      {t('receiverPlatformAddress')}*/}
+                  {/*                  </label>*/}
+                  {/*                  <Input*/}
+                  {/*                      id="receiver-address"*/}
+                  {/*                      placeholder={t('enterReceiverAddress')}*/}
+                  {/*                      value={tokenAddress}*/}
+                  {/*                      onChange={handleUaddrChange}*/}
+                  {/*                      className="bg-primary/5 hover:bg-primary/10 focus:bg-white dark:focus:bg-gray-800 transition-colors"*/}
+                  {/*                  />*/}
+                  {/*                  /!* onChange={(e) => setReceiverAddress(e.target.value)} *!/*/}
+                  {/*              </div>*/}
 
-                                {/* 可用积分余额 */}
-                                <div className="mb-4 p-3 bg-primary/5 rounded-lg">
-                                    <div
-                                        className="text-sm text-gray-600 dark:text-gray-400">{t('available')}{asset.assetsName}{t('balance')}</div>
-                                    <div className="text-xl font-bold">
-                                        {asset.assetsBalance}
-                                        <span className="text-sm text-gray-500 ml-2">≈ ¥{asset.sumPrice}</span>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
+                  {/*              /!* 可用积分余额 *!/*/}
+                  {/*              <div className="mb-4 p-3 bg-primary/5 rounded-lg">*/}
+                  {/*                  <div*/}
+                  {/*                      className="text-sm text-gray-600 dark:text-gray-400">{t('available')}{asset.assetsName}{t('balance')}</div>*/}
+                  {/*                  <div className="text-xl font-bold">*/}
+                  {/*                      {asset.assetsBalance}*/}
+                  {/*                      <span className="text-sm text-gray-500 ml-2">≈ ¥{asset.sumPrice}</span>*/}
+                  {/*                  </div>*/}
+                  {/*              </div>*/}
+                  {/*          </CardContent>*/}
+                  {/*      </Card>*/}
+                  {/*  </motion.div>*/}
 
-                    {/* 转出数量 */}
-                    <motion.div
-                        initial={{opacity: 0, y: 10}}
-                        animate={{opacity: 1, y: 0}}
-                        transition={{delay: 0.2, duration: 0.4}}
-                        className="w-full"
-                    >
-                        <Card
-                            className="w-full mb-4 shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-background to-primary/10 vibrant-card hover-glow">
-                            <CardContent className="p-4">
-                                <label htmlFor="transfer-amount" className="block text-sm font-medium mb-1">
-                                    {t('enterTransferInAmount')}
-                                </label>
-                                {/*placeholder={`${t('maxTransferOut')} ${getAssetAmount(asset)}`}*/}
-                                <Input
-                                    id="transfer-amount"
-                                    type='number'
-                                    placeholder={`${t('enterTransferInAmount')}`}
-                                    value={transferAmount}
-                                    onChange={handleAmountChange}
-                                    className="bg-primary/5 hover:bg-primary/10 focus:bg-white dark:focus:bg-gray-800 transition-colors text-lg font-bold mb-3"
-                                />
+                  {/*  /!* 转出数量 *!/*/}
+                  {/*  <motion.div*/}
+                  {/*      initial={{opacity: 0, y: 10}}*/}
+                  {/*      animate={{opacity: 1, y: 0}}*/}
+                  {/*      transition={{delay: 0.2, duration: 0.4}}*/}
+                  {/*      className="w-full"*/}
+                  {/*  >*/}
+                  {/*      <Card*/}
+                  {/*          className="w-full mb-4 shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-background to-primary/10 vibrant-card hover-glow">*/}
+                  {/*          <CardContent className="p-4">*/}
+                  {/*              <label htmlFor="transfer-amount" className="block text-sm font-medium mb-1">*/}
+                  {/*                  {t('enterTransferInAmount')}*/}
+                  {/*              </label>*/}
+                  {/*              /!*placeholder={`${t('maxTransferOut')} ${getAssetAmount(asset)}`}*!/*/}
+                  {/*              <Input*/}
+                  {/*                  id="transfer-amount"*/}
+                  {/*                  type='number'*/}
+                  {/*                  placeholder={`${t('enterTransferInAmount')}`}*/}
+                  {/*                  value={transferAmount}*/}
+                  {/*                  onChange={handleAmountChange}*/}
+                  {/*                  className="bg-primary/5 hover:bg-primary/10 focus:bg-white dark:focus:bg-gray-800 transition-colors text-lg font-bold mb-3"*/}
+                  {/*              />*/}
 
-                                {/* 手续费和实际扣减 */}
-                                <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">
-                                    <div className="flex justify-between">
-                                        <span>{t('feeRate')}：</span>
-                                        <span className="font-medium">{asset.sellRate * 100}%</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>{t('actualDeductQuantity')}：</span>
-                                        <span className="font-medium">
-                                {actualDeduction.toFixed(transferAmount.includes(".") ? transferAmount.split(".")[1]?.length || 2 : 2)}
-                    </span>
-                                    </div>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
+                  {/*              /!* 手续费和实际扣减 *!/*/}
+                  {/*              <div className="text-sm text-gray-600 dark:text-gray-400 space-y-1">*/}
+                  {/*                  <div className="flex justify-between">*/}
+                  {/*                      <span>{t('feeRate')}：</span>*/}
+                  {/*                      <span className="font-medium">{asset.sellRate * 100}%</span>*/}
+                  {/*                  </div>*/}
+                  {/*                  <div className="flex justify-between">*/}
+                  {/*                      <span>{t('actualDeductQuantity')}：</span>*/}
+                  {/*                      <span className="font-medium">*/}
+                  {/*              {actualDeduction.toFixed(transferAmount.includes(".") ? transferAmount.split(".")[1]?.length || 2 : 2)}*/}
+                  {/*  </span>*/}
+                  {/*                  </div>*/}
+                  {/*              </div>*/}
+                  {/*          </CardContent>*/}
+                  {/*      </Card>*/}
+                  {/*  </motion.div>*/}
 
                     {/* 转入说明 */}
                     <motion.div
@@ -507,8 +513,9 @@ export default function TransferInPage() {
                             variant="default"
                             className="flex items-center justify-center gap-2 h-12 bg-primary hover:bg-primary/90 transition-colors hover-scale"
                             onClick={handleConfirm}
-                            disabled={isSubmitting || !tokenAddress || !transferAmount || parseFloat(transferAmount) <= 0}
+                            disabled={isSubmitting}
                         >
+                            {/*disabled={isSubmitting || !tokenAddress || !transferAmount || parseFloat(transferAmount) <= 0}*/}
                             {isSubmitting ? t('processing') : t('depositAction')}
                         </Button>
                         <Button

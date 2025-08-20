@@ -782,18 +782,20 @@ export interface Translations {
     pushPointsInfo: string
     pushInfo: string
     getOrPushInfo: string
-
-
+    "error.no_pending_into_record_found": string
+    "common.transfer_in": string
+    "common.transfer_out": string
 }
 
 // 中文翻译
 export const zhTranslations: Translations = {
-    getOrPushInfo: "获取信息/推送信息",
+    "common.transfer_in": "转入",
+    "common.transfer_out": "转出",
+    "error.no_pending_into_record_found": "没有要转入的资产",
 
+    getOrPushInfo: "同步信息/推送信息",
     pushInfo: "推送信息",
-
     pushPointsInfo: "推送积分信息",
-
     onlineService: "在线客服",
     contactUpdated: "联系方式已更新",
     updateSuccess1: "已成功更新",
@@ -1189,11 +1191,12 @@ export const zhTranslations: Translations = {
     sellPostSuccess: "发布出售成功",
     sellPosted: "已成功发布出售",
 
-    depositAction: "获取信息",
+    depositAction: "同步信息",
     withdrawAction: "同步信息",
+
     changeRecord: "变动记录",
     noUSDTChangeRecord: "暂无USDT变动记录",
-    withdrawAsset: "获取积分信息",
+    withdrawAsset: "同步积分信息",
     depositAsset: "同步积分信息",
 
     buyAsset: "求购积分",
@@ -1568,12 +1571,12 @@ export const zhTranslations: Translations = {
 
 // 英文翻译
 export const enTranslations: Translations = {
+    "common.transfer_in": "Transfer In",
+    "common.transfer_out": "Transfer Out",
+    "error.no_pending_into_record_found": "No assets to transfer in",
     getOrPushInfo: "Get/Push Information",
-
     pushInfo: "Push Information",
-
     pushPointsInfo: "Push Points Information",
-
     "error.helpCenter_was_not_found": "Help center not found",
     noDatas: "None",
     minimumPurchaseQuantity: "Minimum Purchase Quantity",
@@ -2292,12 +2295,12 @@ export const enTranslations: Translations = {
 
 // 阿拉伯语翻译
 export const arTranslations: Translations = {
+    "common.transfer_in": "التحويل إلى الداخل",
+    "common.transfer_out": "التحويل إلى الخارج",
+    "error.no_pending_into_record_found": "لا توجد أصول للتحويل إلى الداخل",
     getOrPushInfo: "الحصول على/إرسال المعلومات",
-
     pushInfo: "إرسال المعلومات",
-
     pushPointsInfo: "إرسال معلومات النقاط",
-
     "error.helpCenter_was_not_found": "لم يتم العثور على مركز المساعدة",
     noDatas: "لا يوجد",
     "minimumPurchaseQuantity": "الحد الأدنى لكمية الشراء",
@@ -2997,12 +3000,12 @@ export const arTranslations: Translations = {
 
 // 日语翻译
 export const jaTranslations: Translations = {
+    "common.transfer_in": "転入",
+    "common.transfer_out": "転出",
+    "error.no_pending_into_record_found": "転入する資産はありません",
     getOrPushInfo: "情報の取得／プッシュ",
-
     pushInfo: "情報をプッシュ",
-
     pushPointsInfo: "ポイント情報をプッシュ",
-
     noDatas: "なし",
     minimumPurchaseQuantity: "最低購入数量",
     onlineService: "オンラインカスタマーサービス",
@@ -3724,6 +3727,9 @@ export const jaTranslations: Translations = {
 
 // 韩语翻译
 export const koTranslations: Translations = {
+    "common.transfer_in": "전입",
+    "common.transfer_out": "전출",
+    "error.no_pending_into_record_found": "전입할 자산이 없습니다",
     getOrPushInfo: "정보 가져오기/푸시",
     pushPointsInfo: "포인트 정보 푸시",
     pushInfo: "정보 푸시",

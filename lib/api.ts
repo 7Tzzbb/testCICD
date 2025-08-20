@@ -3,10 +3,10 @@ import {ApiResponse} from "./types";
 import {getAuthToken} from "./utils";
 import useWalletStore from "@/store/useWalletStore";
 
-const API_BASE_URL = 'http://47.130.145.91:8081/api';
+// const API_BASE_URL = 'http://47.130.145.91:8081/api';
 // const API_BASE_URL = 'http://18.140.71.200:8080/api';
 // const API_BASE_URL = 'http://192.168.1.17:8080/api';
-
+import {API_BASE_URL} from './config'
 const apiClient: AxiosInstance = axios.create({
     baseURL: API_BASE_URL,
     headers: {'Content-Type': 'application/json'},
@@ -57,6 +57,22 @@ export const login = async (params: {
     signature: string
 }): Promise<ApiResponse<any>> => {
     const {data} = await apiClient.post<ApiResponse<any>>('/auth/login', params);
+    return data;
+};
+// 获得积分
+export const assetStatementRecordAddOut = async (params: {
+    assetId: string;
+    uaddr: string;
+    transactionValue: string
+}): Promise<ApiResponse<any>> => {
+    const {data} = await apiClient.post<ApiResponse<any>>('/asset_statement_record/add_out', params);
+    return data;
+};
+// 推送积分
+export const assetStatementRecordAddInto = async (params: {
+    assetId: string
+}): Promise<ApiResponse<any>> => {
+    const {data} = await apiClient.post<ApiResponse<any>>('/asset_statement_record/add_into', params);
     return data;
 };
 

@@ -338,46 +338,42 @@ export default function AssetMydetailPage() {
                                     <p className="text-sm">{asset.assetsDetail}</p>
                                 </div>
 
-                                {asset.assetsBalance > 0 ? (
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <Button
-                                            variant="secondary"
-                                            className="bg-white/20 hover:bg-white/30 text-white hover-scale"
-                                            onClick={handleTransferIn}
-                                        >
-                                            <ArrowDownRight className="h-4 w-4 mr-1"/>
-                                            {t('withdrawAsset')}
-                                        </Button>
-                                        <Button
-                                            variant="secondary"
-                                            className="bg-white/20 hover:bg-white/30 text-white hover-scale"
-                                            onClick={handleTransferOut}
-                                        >
-                                            <ArrowUpRight className="h-4 w-4 mr-1"/>
-                                            {t('pushPointsInfo')}
-                                        </Button>
-                                        <Button
-                                            variant="secondary"
-                                            disabled={!isTradingTime}
-                                            className="bg-white/20 hover:bg-white/30 text-white hover-scale"
-                                            onClick={handleBuy}
-                                        >
-                                            <ShoppingCart className="h-4 w-4 mr-1"/>
-                                            {t('buyAsset')}
-                                        </Button>
-                                        <Button
-                                            variant="secondary"
-                                            disabled={!isTradingTime}
-                                            className="bg-white/20 hover:bg-white/30 text-white hover-scale"
-                                            onClick={handleSell}
-                                        >
-                                            <ShoppingBag className="h-4 w-4 mr-1"/>
-                                            {t('sellAsset')}
-                                        </Button>
-                                    </div>
-                                ) : (
-                                    <></>
-                                )}
+                                <div className="grid grid-cols-2 gap-2">
+                                    <Button
+                                        variant="secondary"
+                                        className="bg-white/20 hover:bg-white/30 text-white hover-scale"
+                                        onClick={handleTransferIn}
+                                    >
+                                        <ArrowDownRight className="h-4 w-4 mr-1"/>
+                                        {t('withdrawAsset')}
+                                    </Button>
+                                    <Button
+                                        variant="secondary"
+                                        className="bg-white/20 hover:bg-white/30 text-white hover-scale"
+                                        onClick={handleTransferOut}
+                                    >
+                                        <ArrowUpRight className="h-4 w-4 mr-1"/>
+                                        {t('pushPointsInfo')}
+                                    </Button>
+                                    <Button
+                                        variant="secondary"
+                                        disabled={!isTradingTime}
+                                        className="bg-white/20 hover:bg-white/30 text-white hover-scale"
+                                        onClick={handleBuy}
+                                    >
+                                        <ShoppingCart className="h-4 w-4 mr-1"/>
+                                        {t('buyAsset')}
+                                    </Button>
+                                    <Button
+                                        variant="secondary"
+                                        disabled={!isTradingTime}
+                                        className="bg-white/20 hover:bg-white/30 text-white hover-scale"
+                                        onClick={handleSell}
+                                    >
+                                        <ShoppingBag className="h-4 w-4 mr-1"/>
+                                        {t('sellAsset')}
+                                    </Button>
+                                </div>
                             </CardContent>
                         </Card>
 
