@@ -19,6 +19,7 @@ import Link from "next/link"
 import {PageTransition} from "./page-transition"
 import {useRouter, useSearchParams} from "next/navigation"
 import {
+    assetStatementRecordAddInto,
     getAssetsDetail,
     getAssetStatementDetail,
     getAssetStatementRecordPageList,
@@ -26,6 +27,15 @@ import {
 } from "@/lib/api"
 import InfiniteScroll from 'react-infinite-scroll-component'
 import {useLanguage} from "@/lib/i18n/language-context"
+import {
+    AlertDialog,
+    AlertDialogAction, AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle
+} from "@/components/ui/alert-dialog";
 
 // 资产类型
 interface Asset {
@@ -105,6 +115,8 @@ export default function AssetMydetailPage() {
     const [hasMore, setHasMore] = useState(true)
     const pageSize = 10
     const [assetStatementRecords, setAssetStatementRecords] = useState([])
+    const [open, setOpen] = useState(false)
+
     // 资产变动列表
     const getAssetAtatementRecord = async (customPage?: number, type?: any) => {
         const currentPage = customPage || page
@@ -147,8 +159,23 @@ export default function AssetMydetailPage() {
     }
 
     // 处理资产转入
-    const handleTransferIn = () => {
-        router.push(`/assets/transfer-in/info?id=${id}`)
+    const handleTransferIn = async () => {
+        const res = await assetStatementRecordAddInto({
+            "assetId": asset.assetsId,
+        })
+        if (res.code == 0) {
+            toast({
+                title: t('success.sync'),
+                duration: 1500
+            })
+        } else {
+            toast({
+                description: t(res.message),
+                variant: "destructive",
+                duration: 1500
+            })
+        }
+        // router.push(`/assets/transfer-in/info?id=${id}`)
     }
 
     // 处理资产转出
@@ -342,11 +369,30 @@ export default function AssetMydetailPage() {
                                     <Button
                                         variant="secondary"
                                         className="bg-white/20 hover:bg-white/30 text-white hover-scale"
-                                        onClick={handleTransferIn}
+                                        onClick={() => setOpen(true)}
                                     >
                                         <ArrowDownRight className="h-4 w-4 mr-1"/>
                                         {t('withdrawAsset')}
                                     </Button>
+                                    {/*转入*/}
+                                    <AlertDialog open={open} onOpenChange={setOpen}>
+                                        <AlertDialogContent>
+                                            <AlertDialogHeader>
+                                                <AlertDialogTitle>{t('tip')}</AlertDialogTitle>
+                                                <AlertDialogDescription>
+                                                    {t('syncPointsConfirm')}
+                                                </AlertDialogDescription>
+                                            </AlertDialogHeader>
+                                            <AlertDialogFooter>
+                                                <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
+                                                <AlertDialogAction
+                                                    onClick={handleTransferIn}
+                                                >
+                                                    {t('confirm')}
+                                                </AlertDialogAction>
+                                            </AlertDialogFooter>
+                                        </AlertDialogContent>
+                                    </AlertDialog>
                                     <Button
                                         variant="secondary"
                                         className="bg-white/20 hover:bg-white/30 text-white hover-scale"
@@ -428,7 +474,7 @@ export default function AssetMydetailPage() {
                                                                 {transaction.transactionValue}
                                                             </p>
                                                             <p className="text-sm text-gray-500">
-                                                                ${transaction.estimatedValue ?? 0}
+                                                                ¥{transaction.estimatedValue ?? 0}
                                                             </p>
                                                         </div>
                                                     </div>
@@ -443,5 +489,7 @@ export default function AssetMydetailPage() {
                 </main>
             </div>
         </PageTransition>
+
+
     )
 }

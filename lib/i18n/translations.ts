@@ -754,7 +754,6 @@ export interface Translations {
     noData: string
     "error.the_interface_returns_an_error": string
     "error.binding_failed": string
-    "error.the_call_succeeds_but_no_data_is_available": string
     'announcement.system': string              // 系统公告
     'announcement.event': string               // 活动公告
     'announcement.feature_update': string      // 功能更新
@@ -785,10 +784,20 @@ export interface Translations {
     "error.no_pending_into_record_found": string
     "common.transfer_in": string
     "common.transfer_out": string
+    "error.the_call_succeeds_but_no_data_is_available": string
+    'success.sync': string
+    syncPointsConfirm: string
+
 }
 
 // 中文翻译
 export const zhTranslations: Translations = {
+    syncPointsConfirm: "确定要同步积分信息吗？",
+
+    "success.sync": "同步成功",
+
+    "error.the_call_succeeds_but_no_data_is_available": "请先到发行平台绑定",
+
     "common.transfer_in": "转入",
     "common.transfer_out": "转出",
     "error.no_pending_into_record_found": "没有要转入的资产",
@@ -817,7 +826,6 @@ export const zhTranslations: Translations = {
     newUserGift: "新人礼包",
     "error.the_interface_returns_an_error": "接口返回错误",
     "error.binding_failed": "绑定失败",
-    "error.the_call_succeeds_but_no_data_is_available": "调用成功但是无数据",
     "announcement.system": "系统公告",
     "announcement.event": "活动公告",
     "announcement.feature_update": "功能更新",
@@ -1571,6 +1579,12 @@ export const zhTranslations: Translations = {
 
 // 英文翻译
 export const enTranslations: Translations = {
+    syncPointsConfirm: "Are you sure you want to sync points information?",
+
+    "success.sync": "Synchronization successful",
+
+    "error.the_call_succeeds_but_no_data_is_available": "Please bind to the issuance platform first",
+
     "common.transfer_in": "Transfer In",
     "common.transfer_out": "Transfer Out",
     "error.no_pending_into_record_found": "No assets to transfer in",
@@ -1598,7 +1612,6 @@ export const enTranslations: Translations = {
     newUserGift: "New User Gift",
     "error.the_interface_returns_an_error": "The interface returns an error",
     "error.binding_failed": "Binding failed",
-    "error.the_call_succeeds_but_no_data_is_available": "The call succeeded but no data is available",
     "error.arbitration_record_already_exists": "The arbitration record already exists",
     aiAssistant: "AI Assistant",
     noData: "No data",
@@ -2295,6 +2308,12 @@ export const enTranslations: Translations = {
 
 // 阿拉伯语翻译
 export const arTranslations: Translations = {
+    syncPointsConfirm: "هل أنت متأكد من أنك تريد مزامنة معلومات النقاط؟",
+
+    "success.sync": "تمت المزامنة بنجاح",
+
+    "error.the_call_succeeds_but_no_data_is_available": "يرجى الارتباط أولاً بمنصة الإصدار",
+
     "common.transfer_in": "التحويل إلى الداخل",
     "common.transfer_out": "التحويل إلى الخارج",
     "error.no_pending_into_record_found": "لا توجد أصول للتحويل إلى الداخل",
@@ -2322,7 +2341,6 @@ export const arTranslations: Translations = {
     newUserGift: "هدية المستخدم الجديد",
     "error.the_interface_returns_an_error": "واجهة البرمجة تُرجع خطأً",
     "error.binding_failed": "فشل الربط",
-    "error.the_call_succeeds_but_no_data_is_available": "تم الاستدعاء بنجاح ولكن لا توجد بيانات",
     "error.arbitration_record_already_exists": "سجل التحكيم موجود بالفعل",
     aiAssistant: "مساعد الذكاء الاصطناعي",
     noData: "لا توجد بيانات",
@@ -3000,6 +3018,12 @@ export const arTranslations: Translations = {
 
 // 日语翻译
 export const jaTranslations: Translations = {
+    syncPointsConfirm: "ポイント情報を同期してもよろしいですか？",
+
+    "success.sync": "同期に成功しました",
+
+    "error.the_call_succeeds_but_no_data_is_available": "まず発行プラットフォームに連携してください",
+
     "common.transfer_in": "転入",
     "common.transfer_out": "転出",
     "error.no_pending_into_record_found": "転入する資産はありません",
@@ -3029,7 +3053,6 @@ export const jaTranslations: Translations = {
     newUserGift: "新規ユーザー特典",
     "error.the_interface_returns_an_error": "インターフェースからエラーが返されました",
     "error.binding_failed": "バインドに失敗しました",
-    "error.the_call_succeeds_but_no_data_is_available": "呼び出しは成功しましたが、データがありません",
     "error.arbitration_record_already_exists": "この仲裁記録はすでに存在します",
     aiAssistant: "AIアシスタント",
     noData: "データがありません",
@@ -3727,6 +3750,11 @@ export const jaTranslations: Translations = {
 
 // 韩语翻译
 export const koTranslations: Translations = {
+    syncPointsConfirm: "포인트 정보를 동기화하시겠습니까?",
+    "success.sync": "동기화 성공",
+
+    "error.the_call_succeeds_but_no_data_is_available": "먼저 발행 플랫폼에 연결하세요",
+
     "common.transfer_in": "전입",
     "common.transfer_out": "전출",
     "error.no_pending_into_record_found": "전입할 자산이 없습니다",
@@ -3754,7 +3782,6 @@ export const koTranslations: Translations = {
     newUserGift: "신규 유저 선물",
     "error.the_interface_returns_an_error": "인터페이스 오류가 발생했습니다",
     "error.binding_failed": "바인딩 실패",
-    "error.the_call_succeeds_but_no_data_is_available": "호출은 성공했지만 데이터가 없습니다",
     "announcement.system": "시스템 공지",
     "announcement.event": "이벤트 공지",
     "announcement.feature_update": "기능 업데이트",

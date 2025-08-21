@@ -401,7 +401,7 @@ export default function AssetSellPage() {
                                     <Input
                                         type='number'
                                         id="sell-amount"
-                                        placeholder={t('minSellQuantity') + asset.minSellQuantity}
+                                        placeholder={t('sellQuantity')}
                                         value={sellAmount}
                                         onChange={handleAmountChange}
                                         className="bg-red-500/5 hover:bg-red-500/10 focus:bg-white dark:focus:bg-gray-800 transition-colors"
