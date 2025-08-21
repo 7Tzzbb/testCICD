@@ -108,6 +108,12 @@ export default function OrderMyDetailPage() {
         const res = await getOrderTransactionDetail(id)
         if (res.code == 0) {
             setIsLoading(false)
+            if (res.data.paymentMethods && res.data.paymentMethods.length) {
+                res.data.paymentMethods.forEach((v: any) => {
+                    v.details = JSON.parse(v.details)
+                })
+            }
+
             setOrder(res.data)
             // 判断显示仲裁按钮
             const serverTime = new Date(res.data.sellTime.replace(/-/g, '/')) // Safari 兼容

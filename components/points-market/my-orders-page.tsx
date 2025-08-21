@@ -245,7 +245,7 @@ function OrderCard({
                             <Badge variant="outline"
                                    className={order.type === 1 ? "bg-green-100 text-green-700 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-900" : "bg-red-100 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-900"}
                             >
-                                {order.type == 1 ? t('buying') : t('selling')}
+                                {statusText}
                             </Badge>
                         </div>
                         <Badge variant="outline"
