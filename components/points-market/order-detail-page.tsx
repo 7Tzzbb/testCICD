@@ -74,8 +74,8 @@ export default function OrderDetailPage() {
     // 模拟获取订单数据
     useEffect(() => {
         getOrderDetail(id)
-        getCollectionMethodList()
-        contactMethodList()
+        // getCollectionMethodList()
+        // contactMethodList()
     }, [])
 
     // 支付方式
@@ -115,6 +115,11 @@ export default function OrderDetailPage() {
         const res = await getOrderTransactionDetail(id)
         if (res.code == 0) {
             setIsLoading(false)
+            if (res.data.paymentMethods && res.data.paymentMethods.length) {
+                res.data.paymentMethods.forEach((v: any) => {
+                    v.details = JSON.parse(v.details)
+                })
+            }
             setOrder(res.data)
         } else {
             setIsLoading(false)
@@ -410,7 +415,7 @@ export default function OrderDetailPage() {
                                     <p className="text-sm text-muted-foreground">{t('amount')}</p>
                                     <p>{order.amount}</p>
                                 </div>
-                                <div className="col-span-2">
+                                <div className="">
                                     <p className="text-sm text-muted-foreground">{t('totalAmount')}</p>
                                     <p className="text-lg font-bold text-primary">{order.total}</p>
                                 </div>
@@ -425,7 +430,7 @@ export default function OrderDetailPage() {
                             <CardDescription>{t('pleaseUseAnyPaymentMethod')}</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-4">
-                            {paymentMethods
+                            { order.paymentMethods && order.paymentMethods.length ? order.paymentMethods
                                 .map(method => (
                                     <div key={method.id} className="border rounded-lg p-4">
                                         <div className="flex items-center gap-2 mb-2">
@@ -472,7 +477,8 @@ export default function OrderDetailPage() {
                                             )}
                                         </div>
                                     </div>
-                                ))}
+                                )) : ''
+                            }
                         </CardContent>
                     </Card>
 
@@ -483,11 +489,11 @@ export default function OrderDetailPage() {
                         </CardHeader>
                         <CardContent className="space-y-4">
                             {
-                                contactMethods.map((item) => (
+                                order.contactMethods && order.contactMethods.length ? order.contactMethods.map((item) => (
                                     <div key={item.id}>
-                                        <p>{formatcontactMethods(item.type)}-{item.value}</p>
+                                        <p>({formatcontactMethods(item.type)}){item.value}</p>
                                     </div>
-                                ))
+                                )) : ''
                             }
                         </CardContent>
                     </Card>
