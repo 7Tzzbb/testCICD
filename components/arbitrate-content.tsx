@@ -1,13 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useSearchParams, useRouter } from "next/navigation"
-import { useLanguage } from "@/lib/i18n/language-context"
+import {useEffect, useState} from "react"
+import {useSearchParams, useRouter} from "next/navigation"
+import {useLanguage} from "@/lib/i18n/language-context"
 import {Button} from "@/components/ui/button"
-import {arbitrationAdd, getOrdersDetailInfo } from "@/lib/api"
+import {arbitrationAdd, getOrdersDetailInfo} from "@/lib/api"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
 import {Badge} from "@/components/ui/badge"
 import {useToast} from "@/hooks/use-toast"
+import {ShoppingCart} from "lucide-react"
+
 export function ArbitrateContent() {
     const router = useRouter()
     const {toast} = useToast()
@@ -72,8 +74,7 @@ export function ArbitrateContent() {
     return (
         <main className="flex-1 container px-4 py-4 space-y-4">
             <Card className="shadow-lg rounded-lg">
-                <CardHeader
-                    className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 rounded-t-lg">
+                <CardHeader className="rounded-t-lg">
                     <CardTitle>{t('orderInfo')}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -94,15 +95,15 @@ export function ArbitrateContent() {
                             <p className="text-sm text-muted-foreground">{t('amount')}</p>
                             <p>{orderDatas.amount}</p>
                         </div>
-                        <div className="col-span-2">
+                        <div className="">
                             <p className="text-sm text-muted-foreground">{t('totalAmount')}</p>
                             <p className="text-lg font-bold text-primary">{orderDatas.total}</p>
                         </div>
                         <div className="col-span-2">
                             <h2 className="text-lg font-medium mb-4 flex items-center">
-                                {/*<span className="bg-primary/20 text-primary p-1 rounded-md mr-2">*/}
-                                {/*  <ShoppingCart className="h-4 w-4" />*/}
-                                {/*</span>*/}
+                                <span className="bg-primary/20 text-primary p-1 rounded-md mr-2">
+                                  <ShoppingCart className="h-4 w-4"/>
+                                </span>
                                 {orderDatas.type == 1 ? t('sell') : t('buy')}
                             </h2>
 
@@ -123,7 +124,7 @@ export function ArbitrateContent() {
                                 />
                             </div>
 
-                            <div className="mb-4 p-3 bg-primary/5 rounded-lg">
+                            <div className="mb-4 p-3 bg-primary/5 rounded-lg border border-input">
                                 <div className="text-sm text-gray-600 dark:text-gray-400">{t('totalAmounts')}</div>
                                 <div className="text-xl font-bold">
                                     ¥{calculateTotalPayment().toLocaleString()}
@@ -134,7 +135,7 @@ export function ArbitrateContent() {
                 </CardContent>
             </Card>
 
-            <div className="space-y-2 pt-4">
+            <div className="space-y-2 pt-2">
                 <Button className="w-full py-3 text-lg" onClick={add}>{t('confirm')}</Button>
                 <Button variant="outline" className="w-full py-3 text-lg" onClick={() => router.back()}>
                     {t('back')}

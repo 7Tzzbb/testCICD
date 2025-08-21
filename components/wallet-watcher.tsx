@@ -192,6 +192,9 @@ export function WalletWatcher() {
                 reset();
                 return;
             }
+            // else {
+            //     router.push("/profile");
+            // }
 
             // 防止重复触发两次认证请求
             if (isConnectingRef.current || isAddressChangedRef.current) return;

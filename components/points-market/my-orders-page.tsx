@@ -312,8 +312,8 @@ function OrderCard({
                                     {t('contactInfo')}:
                                 </div>
                                 <div>
-                                    {formatcontactMethods.contactMethods && order.contactMethods.length ? (
-                                        formatPayType(order.contactMethods).map((method, index) => (
+                                    {order.contactMethods && order.contactMethods.length ? (
+                                        formatcontactMethods(order.contactMethods).map((method, index) => (
                                             <Badge className="bg-gray-200 text-balck whitespace-nowrap mr-1 mb-1"
                                                    key={index}>
                                                 {method}

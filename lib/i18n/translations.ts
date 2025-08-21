@@ -787,11 +787,18 @@ export interface Translations {
     "error.the_call_succeeds_but_no_data_is_available": string
     'success.sync': string
     syncPointsConfirm: string
-
+    "error.price_exceeds_ceiling": string
+    "error.price_below_floor": string
+    pleaseSelectContactMethod: string
+    specifyBuyerContactMethod: string
 }
 
 // 中文翻译
 export const zhTranslations: Translations = {
+    pleaseSelectContactMethod: "请选择联系方式",
+    specifyBuyerContactMethod: "请指定买家的联系方式",
+    "error.price_exceeds_ceiling": "单价大于最高限价",
+    "error.price_below_floor": "单价小于最低限价",
     syncPointsConfirm: "确定要同步积分信息吗？",
 
     "success.sync": "同步成功",
@@ -1579,6 +1586,10 @@ export const zhTranslations: Translations = {
 
 // 英文翻译
 export const enTranslations: Translations = {
+    pleaseSelectContactMethod: "Please select a contact method",
+    specifyBuyerContactMethod: "Please specify the buyer's contact method",
+    "error.price_exceeds_ceiling": "The unit price exceeds the maximum limit",
+    "error.price_below_floor": "The unit price is below the minimum limit",
     syncPointsConfirm: "Are you sure you want to sync points information?",
 
     "success.sync": "Synchronization successful",
@@ -2308,6 +2319,10 @@ export const enTranslations: Translations = {
 
 // 阿拉伯语翻译
 export const arTranslations: Translations = {
+    pleaseSelectContactMethod: "يرجى اختيار طريقة الاتصال",
+    specifyBuyerContactMethod: "يرجى تحديد وسيلة الاتصال الخاصة بالمشتري",
+    "error.price_exceeds_ceiling": "يتجاوز سعر الوحدة الحد الأقصى",
+    "error.price_below_floor": "سعر الوحدة أقل من الحد الأدنى",
     syncPointsConfirm: "هل أنت متأكد من أنك تريد مزامنة معلومات النقاط؟",
 
     "success.sync": "تمت المزامنة بنجاح",
@@ -3018,6 +3033,10 @@ export const arTranslations: Translations = {
 
 // 日语翻译
 export const jaTranslations: Translations = {
+    pleaseSelectContactMethod: "連絡方法を選択してください",
+    specifyBuyerContactMethod: "購入者の連絡方法を指定してください",
+    "error.price_exceeds_ceiling": "単価が上限価格を超えています",
+    "error.price_below_floor": "単価が下限価格を下回っています",
     syncPointsConfirm: "ポイント情報を同期してもよろしいですか？",
 
     "success.sync": "同期に成功しました",
@@ -3750,6 +3769,10 @@ export const jaTranslations: Translations = {
 
 // 韩语翻译
 export const koTranslations: Translations = {
+    pleaseSelectContactMethod: "연락 방식을 선택하세요",
+    specifyBuyerContactMethod: "구매자의 연락 방식을 지정하세요",
+    "error.price_exceeds_ceiling": "단가가 최고 한도를 초과했습니다",
+    "error.price_below_floor": "단가가 최저 한도 미만입니다",
     syncPointsConfirm: "포인트 정보를 동기화하시겠습니까?",
     "success.sync": "동기화 성공",
 

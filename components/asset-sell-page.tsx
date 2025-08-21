@@ -195,6 +195,14 @@ export default function AssetSellPage() {
             })
             return
         }
+        if(contactMethodListChecked.length === 0) {
+            toast({
+                title: t('pleaseSelectContactMethod'),
+                variant: "destructive",
+                duration: 1500
+            })
+            return
+        }
 
         setIsSubmitting(true)
 
@@ -284,7 +292,6 @@ export default function AssetSellPage() {
                 return 'TWITTER'
             case 'LINKEDIN':
                 return 'LINKEDIN'
-
         }
     }
     if (isLoading || !asset) {
@@ -332,7 +339,7 @@ export default function AssetSellPage() {
                         <h1 className="font-bold text-lg">{t('sell')}{asset.assetsName}</h1>
                     </div>
                     <span className={`ml-2 px-2 py-1 text-xs rounded-full ${getTypeColor(asset.type)}`}>
-          </span>
+                    </span>
                 </div>
             </header>
 
@@ -354,9 +361,9 @@ export default function AssetSellPage() {
                             className="w-full mb-4 shadow-md hover:shadow-lg transition-all duration-300 border-t-4 border-t-red-500 vibrant-card hover-glow">
                             <CardContent className="p-4">
                                 <h2 className="text-lg font-medium mb-4 flex items-center">
-                  <span className="bg-red-500/20 text-red-500 p-1 rounded-md mr-2">
-                    <ShoppingBag className="h-4 w-4"/>
-                  </span>
+                                    <span className="bg-red-500/20 text-red-500 p-1 rounded-md mr-2">
+                                      <ShoppingBag className="h-4 w-4"/>
+                                    </span>
                                     {t('sell')}{asset.assetsName}
                                 </h2>
 
@@ -401,7 +408,7 @@ export default function AssetSellPage() {
                                     <Input
                                         type='number'
                                         id="sell-amount"
-                                        placeholder={t('sellQuantity')}
+                                        placeholder={t('minSellQuantity') + asset.minSellQuantity}
                                         value={sellAmount}
                                         onChange={handleAmountChange}
                                         className="bg-red-500/5 hover:bg-red-500/10 focus:bg-white dark:focus:bg-gray-800 transition-colors"
@@ -467,6 +474,7 @@ export default function AssetSellPage() {
                                             onChange={handleMinTradeAmountChange}
                                             className="bg-red-500/5 hover:bg-red-500/10 focus:bg-white dark:focus:bg-gray-800 transition-colors"
                                         />
+
                                     </div>
                                 )}
 
@@ -588,8 +596,7 @@ export default function AssetSellPage() {
                         initial={{opacity: 0, y: 10}}
                         animate={{opacity: 1, y: 0}}
                         transition={{delay: 0.3, duration: 0.4}}
-                        className="w-full"
-                    >
+                        className="w-full">
                         <Card
                             className="w-full mb-6 border-l-4 border-l-red-500 dark:border-l-red-600 shadow-md hover:shadow-lg transition-all duration-300 vibrant-card hover-glow">
                             <CardContent className="p-4">

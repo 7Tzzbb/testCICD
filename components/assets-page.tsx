@@ -462,14 +462,16 @@ export default function AssetsPage() {
                                                                         </span>
                                                                             <div
                                                                                 className={`text-xs ml-2 flex items-center`}>
-                                      <span>
-                                        {asset.rise > 0 ? <TrendingUp className="h-3 w-3 mr-0.5 text-green-500"/> :
-                                            <TrendingDown className="h-3 w-3 mr-0.5 text-red-500"/>}
-                                      </span>
+                                                                                <span>
+                                                                                  {asset.rise > 0 ? <TrendingUp
+                                                                                          className="h-3 w-3 mr-0.5 text-green-500"/> :
+                                                                                      <TrendingDown
+                                                                                          className="h-3 w-3 mr-0.5 text-red-500"/>}
+                                                                                </span>
                                                                                 <span
                                                                                     className={asset.rise > 0 ? "text-green-500" : "text-red-500"}>
-                                        {asset.rise}%
-                                      </span>
+                                                                                    {asset.rise}%
+                                                                                </span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -478,7 +480,7 @@ export default function AssetsPage() {
                                                                     <p className="font-bold gradient-text-primary">{asset.assetsBalance || 0}</p>
                                                                     <p className="text-sm text-gray-500">
                                                                         {/*≈ {asset.sumPrice * asset.assetsBalance}*/}
-                                                                        ≈{(asset?.sumPrice || 0)}
+                                                                        ≈ {(asset?.sumPrice || 0)}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -527,9 +529,9 @@ export default function AssetsPage() {
                                                                     <div className="flex items-center ml-2">
                                                                         {getStatusIcon(transaction.status)}
                                                                         <span className="text-xs ml-1">
-                                    {transaction.status == 1 ? t('pendingPayment') :
-                                        transaction.status == 2 ? t('pendingRelease') : transaction.status == 3 ? t('cancelled') : t('completed')}
-                                  </span>
+                                                                            {transaction.status == 1 ? t('pendingPayment') :
+                                                                                transaction.status == 2 ? t('pendingRelease') : transaction.status == 3 ? t('cancelled') : t('completed')}
+                                                                        </span>
                                                                     </div>
                                                                 </div>
                                                             </div>

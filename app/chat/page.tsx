@@ -13,8 +13,8 @@ export default function ChatPage() {
     const toBack = () => {
         router.back()
     }
-    const BASE_URL = 'http://13.251.81.128:3000'
-    const WEBSITE_TOKEN = 'yL2WGLHJeVBDDjLCgn6aGgpy'
+    const BASE_URL = 'http://13.212.121.95:3000'
+    const WEBSITE_TOKEN = '9z7CmupZ9QksBZTGiHkDTWaH'
     const iframeUrl = `${BASE_URL}/widget?website_token=${WEBSITE_TOKEN}`
     return (
         <div className="h-screen w-screen p-0 m-0 overflow-hidden pb-16">
@@ -26,7 +26,7 @@ export default function ChatPage() {
                     <h1 className="font-bold text-lg ml-2">{t('onlineService')}</h1>
                 </div>
             </header>
-            <WalletWatcher/>
+            <WalletWatcher />
             <iframe
                 src={iframeUrl}
                 width="100%"

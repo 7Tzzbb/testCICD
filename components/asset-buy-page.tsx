@@ -179,6 +179,14 @@ export default function AssetBuyPage() {
             })
             return
         }
+        if (contactMethodListChecked.length === 0) {
+            toast({
+                title: t('pleaseSelectContactMethod'),
+                variant: "destructive",
+                duration: 1500
+            })
+            return
+        }
 
         setIsSubmitting(true)
 
@@ -376,7 +384,7 @@ export default function AssetBuyPage() {
                                     <Input
                                         id="buy-amount"
                                         type='number'
-                                        placeholder={t('buyQuantity')}
+                                        placeholder={t('minimumPurchaseQuantity') + asset.minBuyQuantity}
                                         value={buyAmount}
                                         onChange={handleAmountChange}
                                         className="bg-primary/5 hover:bg-primary/10 focus:bg-white dark:focus:bg-gray-800 transition-colors"

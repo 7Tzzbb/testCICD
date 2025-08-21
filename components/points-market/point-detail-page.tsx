@@ -805,8 +805,8 @@ export default function PointDetailPage() {
                                                         <div>
                                                             <p className="text-xs text-gray-500 mb-1">{t('contactInfo')}:</p>
                                                             <div className="flex space-x-1">
-                                                                {order.formatcontactMethods && order.contactMethods.length ? (
-                                                                    formatPayType(order.contactMethods).map((method, index) => (
+                                                                {order.contactMethods && order.contactMethods.length ? (
+                                                                    formatcontactMethods(order.contactMethods).map((method, index) => (
                                                                         <span key={index} className="p-1 bg-gray-100 rounded">
       <span className="text-blue-500 text-xs">{method}</span>
     </span>

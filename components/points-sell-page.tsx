@@ -193,6 +193,15 @@ export default function AssetSellPage() {
             return
         }
 
+        if (contactMethodListChecked.length === 0) {
+            toast({
+                title: t('pleaseSelectContactMethod'),
+                variant: "destructive",
+                duration: 1500
+            })
+            return
+        }
+
         setIsSubmitting(true)
 
 
