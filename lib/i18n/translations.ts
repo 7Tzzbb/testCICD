@@ -791,10 +791,14 @@ export interface Translations {
     "error.price_below_floor": string
     pleaseSelectContactMethod: string
     specifyBuyerContactMethod: string
+    pleaseCompleteContactAndPaymentInfo: string
+
 }
 
 // 中文翻译
 export const zhTranslations: Translations = {
+    pleaseCompleteContactAndPaymentInfo: "请先完善联系信息和收款信息",
+
     pleaseSelectContactMethod: "请选择联系方式",
     specifyBuyerContactMethod: "请指定买家的联系方式",
     "error.price_exceeds_ceiling": "单价大于最高限价",
@@ -1586,6 +1590,8 @@ export const zhTranslations: Translations = {
 
 // 英文翻译
 export const enTranslations: Translations = {
+    pleaseCompleteContactAndPaymentInfo: "Please complete your contact and payment information first",
+
     pleaseSelectContactMethod: "Please select a contact method",
     specifyBuyerContactMethod: "Please specify the buyer's contact method",
     "error.price_exceeds_ceiling": "The unit price exceeds the maximum limit",
@@ -2319,6 +2325,8 @@ export const enTranslations: Translations = {
 
 // 阿拉伯语翻译
 export const arTranslations: Translations = {
+    pleaseCompleteContactAndPaymentInfo: "يرجى أولاً استكمال معلومات الاتصال ومعلومات الدفع",
+
     pleaseSelectContactMethod: "يرجى اختيار طريقة الاتصال",
     specifyBuyerContactMethod: "يرجى تحديد وسيلة الاتصال الخاصة بالمشتري",
     "error.price_exceeds_ceiling": "يتجاوز سعر الوحدة الحد الأقصى",
@@ -3033,6 +3041,8 @@ export const arTranslations: Translations = {
 
 // 日语翻译
 export const jaTranslations: Translations = {
+    pleaseCompleteContactAndPaymentInfo: "まず連絡先情報と受取情報を完成させてください",
+
     pleaseSelectContactMethod: "連絡方法を選択してください",
     specifyBuyerContactMethod: "購入者の連絡方法を指定してください",
     "error.price_exceeds_ceiling": "単価が上限価格を超えています",
@@ -3769,6 +3779,7 @@ export const jaTranslations: Translations = {
 
 // 韩语翻译
 export const koTranslations: Translations = {
+    pleaseCompleteContactAndPaymentInfo: "먼저 연락처 정보와 수금 정보를 완성해주세요",
     pleaseSelectContactMethod: "연락 방식을 선택하세요",
     specifyBuyerContactMethod: "구매자의 연락 방식을 지정하세요",
     "error.price_exceeds_ceiling": "단가가 최고 한도를 초과했습니다",

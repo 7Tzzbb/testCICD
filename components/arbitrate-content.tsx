@@ -55,11 +55,16 @@ export function ArbitrateContent() {
             type: orderDatas.type == 1 ? 2 : 1
         })
         if (res.code == 0) {
-            router.back()
             toast({
                 description: orderDatas.type == "1" ? t('sellSuccess') : t('buySuccess'),
                 duration: 1500
             })
+            if (orderDatas.type == 2) {
+                router.push(`/points-market/order/info?id=${res.data.id}`)
+            } else {
+                router.back()
+            }
+
         } else {
             toast({
                 description: t(res.message),

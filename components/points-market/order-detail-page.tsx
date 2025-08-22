@@ -74,8 +74,8 @@ export default function OrderDetailPage() {
     // 模拟获取订单数据
     useEffect(() => {
         getOrderDetail(id)
-        // getCollectionMethodList()
-        // contactMethodList()
+        getCollectionMethodList()
+        contactMethodList()
     }, [])
 
     // 支付方式
@@ -154,51 +154,59 @@ export default function OrderDetailPage() {
 
     // 确认付款
     const confirmPayment = async () => {
-        const provider = new ethers.providers.Web3Provider(ethereum)
-        await provider.send("eth_requestAccounts", [])
-        const signer = provider.getSigner()
-        const address = await signer.getAddress()
-        authNonce(address).then(async res => {
-            if (res.code == 0) {
-                // 使用钱包进行签名
-                const signature = await signer.signMessage(res.data);
-                // 验签
-                authVerify({
-                    userAddr: address,
-                    signature,
-                    message: res.data
-                }).then(r => {
-                    if (r.code == 0) {
-                        payOrderTransaction(order.id).then(async result => {
-                            if (result.code == 0) {
-                                setPaymentConfirmed(true)
-                                setShowContactInfo(true)
-                                toast({
-                                    description: t('paymentConfirmedWaitSeller'),
-                                    duration: 1500
-                                })
-                                router.back()
-                            } else {
-                                toast({
-                                    description: t(result.message),
-                                    duration: 1500
-                                })
-                            }
-                        })
-                    } else {
-                        toast({
-                            description: t(r.message),
-                            duration: 1500
-                        })
-                    }
-                })
-            } else {
-                toast({
-                    description: t(res.message),
-                    duration: 1500
-                })
-            }
-        })
+        if (paymentMethods.length && contactMethods.length) {
+            const provider = new ethers.providers.Web3Provider(ethereum)
+            await provider.send("eth_requestAccounts", [])
+            const signer = provider.getSigner()
+            const address = await signer.getAddress()
+            authNonce(address).then(async res => {
+                if (res.code == 0) {
+                    // 使用钱包进行签名
+                    const signature = await signer.signMessage(res.data);
+                    // 验签
+                    authVerify({
+                        userAddr: address,
+                        signature,
+                        message: res.data
+                    }).then(r => {
+                        if (r.code == 0) {
+                            payOrderTransaction(order.id).then(async result => {
+                                if (result.code == 0) {
+                                    setPaymentConfirmed(true)
+                                    setShowContactInfo(true)
+                                    toast({
+                                        description: t('paymentConfirmedWaitSeller'),
+                                        duration: 1500
+                                    })
+                                    router.push(`/points-market/my-orders/`)
+                                } else {
+                                    toast({
+                                        description: t(result.message),
+                                        duration: 1500
+                                    })
+                                }
+                            })
+                        } else {
+                            toast({
+                                description: t(r.message),
+                                duration: 1500
+                            })
+                        }
+                    })
+                } else {
+                    toast({
+                        description: t(res.message),
+                        duration: 1500
+                    })
+                }
+            })
+        } else {
+            toast({
+                description: t('pleaseCompleteContactAndPaymentInfo'),
+                variant: "destructive",
+                duration: 1500
+            })
+        }
     }
     // 格式化联系方式
     const formatcontactMethods = (type: string) => {
@@ -322,7 +330,8 @@ export default function OrderDetailPage() {
                 description: t('appealSubmitted'),
                 duration: 1500
             })
-            router.back()
+            router.push(`/points-market/my-orders/`)
+            // router.back()
         } else {
             toast({
                 description: t(res.message),
@@ -337,7 +346,7 @@ export default function OrderDetailPage() {
                 <header
                     className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <div className="container flex items-center h-14 px-4">
-                        <Button variant="ghost" size="icon" onClick={() => router.back()}>
+                        <Button variant="ghost" size="icon" onClick={() => router.push(`/points-market/my-orders/`)}>
                             <ArrowLeft className="h-5 w-5"/>
                         </Button>
                         <h1 className="font-bold text-lg ml-2">{t('orderDetail')}</h1>
@@ -356,7 +365,7 @@ export default function OrderDetailPage() {
                 <header
                     className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <div className="container flex items-center h-14 px-4">
-                        <Button variant="ghost" size="icon" onClick={() => router.back()}>
+                        <Button variant="ghost" size="icon" onClick={() => router.push(`/points-market/my-orders/`)}>
                             <ArrowLeft className="h-5 w-5"/>
                         </Button>
                         <h1 className="font-bold text-lg ml-2">{t('orderDetail')}</h1>
@@ -375,7 +384,7 @@ export default function OrderDetailPage() {
                 <header
                     className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <div className="container flex items-center h-14 px-4">
-                        <Button variant="ghost" size="icon" onClick={() => router.back()}>
+                        <Button variant="ghost" size="icon" onClick={() => router.push(`/points-market/my-orders/`)}>
                             <ArrowLeft className="h-5 w-5"/>
                         </Button>
                         <h1 className="font-bold text-lg ml-2">{t('orderDetail')}</h1>
@@ -636,7 +645,7 @@ export default function OrderDetailPage() {
                         {/*)}*/}
 
                         <div className="flex gap-2">
-                            <Button variant="outline" className="flex-1" onClick={() => router.back()}>
+                            <Button variant="outline" className="flex-1" onClick={() => router.push(`/points-market/my-orders/`)}>
                                 {t('back')}
                             </Button>
                         </div>

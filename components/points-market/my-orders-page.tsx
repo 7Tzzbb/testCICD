@@ -106,6 +106,16 @@ function OrderCard({
                 return <Clock className="h-4 w-4 text-blue-500"/>
         }
     }
+    // 订单已完成显示type 求购还是出售
+    // 1为挂买 2为挂卖 3.冻结 4.解冻
+    const formatOrderType = (type: number) => {
+        switch (type) {
+            case 1:
+                return t('buyRequest')
+            case 2:
+                return t('marketSellLabel')
+        }
+    }
 
     // 状态辅助函数
     const getStatusIcons = (status: number) => {
@@ -245,7 +255,7 @@ function OrderCard({
                             <Badge variant="outline"
                                    className={order.type === 1 ? "bg-green-100 text-green-700 border-green-200 dark:bg-green-900/20 dark:text-green-400 dark:border-green-900" : "bg-red-100 text-red-700 border-red-200 dark:bg-red-900/20 dark:text-red-400 dark:border-red-900"}
                             >
-                                {statusText}
+                                {currentTab != 4 ? statusText : formatOrderType(order.type)}
                             </Badge>
                         </div>
                         <Badge variant="outline"
