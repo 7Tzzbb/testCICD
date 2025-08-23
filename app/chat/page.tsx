@@ -13,8 +13,8 @@ export default function ChatPage() {
     const toBack = () => {
         router.back()
     }
-    const BASE_URL = 'http://13.212.121.95:3000'
-    const WEBSITE_TOKEN = '9z7CmupZ9QksBZTGiHkDTWaH'
+    const BASE_URL = 'http://18.139.247.138:3000'
+    const WEBSITE_TOKEN = 'T9ftL1165S9hwAjrJkMJEXa4'
     const iframeUrl = `${BASE_URL}/widget?website_token=${WEBSITE_TOKEN}`
     return (
         <div className="h-screen w-screen p-0 m-0 overflow-hidden pb-16">

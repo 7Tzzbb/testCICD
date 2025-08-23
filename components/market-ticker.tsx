@@ -14,14 +14,13 @@ interface MarketItem {
 
 export function MarketTicker() {
   const [marketData] = useState<MarketItem[]>([
-    { name: "BTC", price: "¥198,532", change: "+2.3%", isUp: true, type: "crypto" },
-    { name: "ETH", price: "¥10,234", change: "+1.5%", isUp: true, type: "crypto" },
+    { name: "A积分", price: "¥198,532", change: "+2.3%", isUp: true, type: "crypto" },
+    { name: "B积分", price: "¥10,234", change: "+1.5%", isUp: true, type: "crypto" },
     { name: "航空积分", price: "¥0.05/分", change: "+3.2%", isUp: true, type: "points" },
     { name: "商场积分", price: "¥0.03/分", change: "+1.5%", isUp: true, type: "points" },
     { name: "酒店积分", price: "¥0.04/分", change: "-0.5%", isUp: false, type: "points" },
     { name: "银行积分", price: "¥0.02/分", change: "+0.7%", isUp: true, type: "points" },
     { name: "黄金份额", price: "¥398/g", change: "+0.8%", isUp: true, type: "rwa" },
-    { name: "USDT", price: "¥7.21", change: "-0.1%", isUp: false, type: "crypto" },
   ])
 
   const tickerRef = useRef<HTMLDivElement>(null)
